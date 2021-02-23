@@ -1,0 +1,107 @@
+.vertical-off-4 {
+	margin-top: 100px;
+}
+
+.login-form fieldset legend {
+	padding: 5px;
+	text-align: center;
+	font-size: 30px;
+}
+
+.login-button {
+	padding: 6px;
+    font-size: 20px;
+    width: 25%;
+    height: 39px;
+    margin-left: 42%;
+	
+}
+
+.calendars-popup {
+    z-index: 10000;
+}
+
+.create-modal {
+	height: 500px;
+	overflow: auto;
+}
+
+.edit-modal {
+	height: 570px;
+	overflow: auto;
+}
+
+.candidate-photo {
+	width: 65px;
+	height: 70px;
+}
+
+.upload-photo {
+	height: 400px;
+	width: 345px;
+}
+
+.div-hide {
+	display: none;
+}
+
+.classSideBar {
+	cursor: pointer;
+}
+
+/*removes the calendar days*/
+.alternate-dates {
+	display: none;
+}
+
+.auth_list{
+	text-decoration: none;
+    list-style: none;
+    display: flex;
+    background: #2a5c8a;
+    padding: 5px;
+    margin-top: -19px;
+    border-radius: 6px;
+	margin-bottom: 20px;
+}
+.auth_list li{
+	background-color: #1fb4b7;
+    color: #ffff;
+    /* margin: 2px 19px; */
+    padding-top: -3px;
+    /* margin-top: -18px; */
+    /* margin: 0px 22px; */
+    padding: 4px;
+	font-family: fangsong;
+    width: 68px;
+    text-align: center;
+    margin: 0px 66px;
+    border-radius: 5px;
+}
+.auth_list li:hover{
+	background: #dcd1d1;
+    color: #0e0e0e;
+    font-family: fangsong;
+    font-weight: 800;
+    cursor: pointer;
+}
+.auth_list li.active{
+	background: #dcd1d1;
+    color: #0e0e0e;
+    font-family: fangsong;
+    font-weight: 800;
+    cursor: pointer;
+}
+.auth_list a{
+	text-decoration: none;
+}
+.register_part{
+	margin-top: 10%;
+    margin-left: 37%;
+}
+.panel-body {
+    padding: 15px;
+    background: #fbfbfb;
+    box-shadow: -1px 4px 6px -5px;
+
+}
