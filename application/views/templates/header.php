@@ -1,3 +1,11 @@
+
+<?php  
+
+if(isset($this->session->role)){
+    $user_role = $this->session->role;
+}
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,8 +65,10 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="glyphicon glyphicon-list-alt"></i> Student <span class="caret"></span></a>
 
           <ul class="dropdown-menu">
+            <?php if($user_role!='student'){ ?>
             <li id="addStudentNav"><a href="<?php echo base_url('student?opt=addst') ?>">Add Student</a></li>                        
-            <li id="addBulkStudentNav"><a href="<?php echo base_url('student?opt=bulkst') ?>">Add Bulk Student</a></li>                        
+            <li id="addBulkStudentNav"><a href="<?php echo base_url('student?opt=bulkst') ?>">Add Bulk Student</a></li>     
+            <?php } ?>                   
             <li id="manageStudentNav"><a href="<?php echo base_url('student?opt=mgst') ?>">Manage Student</a></li>           
           </ul>
         </li>
@@ -78,7 +88,7 @@
             <li id="manageMarks"><a href="<?php echo base_url('marksheet?opt=mgmk') ?>">Manage Marks</a></li>
           </ul>
         </li>
-
+        <?php if($user_role=='admin') {?>
         <li class="dropdown" id="topAccountMainNav">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="glyphicon glyphicon-indent-left"></i> Accounting <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -88,6 +98,7 @@
             <li id="incomeNav"><a href="<?php echo base_url('accounting?opt=ime') ?>">Income</a></li>           
           </ul>
         </li>
+        <?php } ?>
       </ul>      
       <ul class="nav navbar-nav navbar-right">        
         <li class="dropdown">

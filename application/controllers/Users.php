@@ -54,6 +54,7 @@ class Users extends MY_Controller
 
 					$user_data = array(
 						'id' => $login,
+						'role'=> $user,
 						'logged_in' => true
 					);
 
@@ -82,17 +83,18 @@ class Users extends MY_Controller
 			$validator = array('success' => false, 'messages' => array());
 
 			$this->form_validation->set_rules('student_id', 'student_id', 'trim|required');
-			$this->form_validation->set_rules('password', 'password', 'trim|required|min_length[6]|max_length[12]');
+			$this->form_validation->set_rules('email', 'email', 'trim|required');
 
 			if($this->form_validation->run() === true) {			
 				$student_id = $this->input->post('student_id');
-				$password = $this->input->post('password');
-				$student_login = $this->model_users->student_login($student_id,$password);
-				if($student_login != FALSE) {
+				$email = $this->input->post('email');
+				$student_login = $this->model_users->student_login($student_id,$email);
+				if($student_login) {
 					$this->load->library('session');
 
 					$user_data = array(
 						'id' => $student_login,
+						'role'=> $user,
 						'logged_in' => true
 					);
 
@@ -121,17 +123,18 @@ class Users extends MY_Controller
 			$validator = array('success' => false, 'messages' => array());
 
 			$this->form_validation->set_rules('teacher_id', 'teacher_id', 'trim|required');
-			$this->form_validation->set_rules('password', 'password', 'trim|required|min_length[6]|max_length[12]');
+			$this->form_validation->set_rules('email', 'email', 'trim|required');
 
 			if($this->form_validation->run() === true) {			
 				$teacher_id = $this->input->post('teacher_id');
-				$password = $this->input->post('password');
-				$teacher_login = $this->model_users->teacher_login($teacher_id,$password);
-				if($teacher_login != FALSE) {
+				$email = $this->input->post('email');
+				$teacher_login = $this->model_users->teacher_login($teacher_id,$email);
+				if($teacher_login) {
 					$this->load->library('session');
 
 					$user_data = array(
-						'id' => $teacher_login,
+						'id' => $teacher_id,
+						'role'=> $user,
 						'logged_in' => true
 					);
 

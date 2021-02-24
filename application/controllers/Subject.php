@@ -36,22 +36,25 @@ class Subject extends MY_Controller
 				Class Name : '.$classData['class_name'].'
 			</div>
 
-			<div id="messages"></div>
-
-			<div class="pull pull-right">
+			<div id="messages"></div>';
+			if($this->session->role=='admin'){
+			$table .= '<div class="pull pull-right">
 	  			<button class="btn btn-default" data-toggle="modal" data-target="#addSubjectModal" onclick="addSubject('.$classId.')">Add Subject</button>	
-		  	</div>
+		  	</div>';
+			}
 		  		
-		  	<br /> <br />
+			$table .= '<br /> <br />
 
 		  	<!-- Table -->
 		  	<table class="table table-bordered" id="manageSubjectTable">
 			    <thead>	
 			    	<tr>
 			    		<th> Subject Name </th>			    		
-			    		<th> Teacher Name  </th>
-			    		<th> Action </th>
-			    	</tr>
+			    		<th> Teacher Name  </th>';
+						if($this->session->role=='admin'){
+							$table .= '<th> Action </th>';
+						}
+						$table .= '</tr>
 			    </thead>
 			    <tbody>';
 			    	if($subjectData) {
@@ -72,10 +75,11 @@ class Subject extends MY_Controller
 
 				    		$table .= '<tr>
 				    			<td>'.$value['name'].'</td>				    			
-				    			<td>'.$teacherData['fname'].' '.$teacherData['lname'].'</td>
-				    			<td>'.$button.'</td>
-				    		</tr>
-				    		';
+				    			<td>'.$teacherData['fname'].' '.$teacherData['lname'].'</td>';
+								if($this->session->role == 'admin'){
+									$table .= '<td>'.$button.'</td>';
+								}
+								$table .= '</tr>';
 				    	} // /foreach				    	
 			    	} 
 			    	else {

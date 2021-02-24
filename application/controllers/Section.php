@@ -36,22 +36,24 @@ class Section extends MY_Controller
 				Class Name : '.$classData['class_name'].'
 			</div>
 
-			<div id="messages"></div>
-
-			<div class="pull pull-right">
+			<div id="messages"></div>';
+			if($this->session->role=='admin'){
+				$table .= '<div class="pull pull-right">
 	  			<button class="btn btn-default" data-toggle="modal" data-target="#addSectionModal" onclick="addSection('.$classId.')">Add Section</button>	
-		  	</div>
-		  		
-		  	<br /> <br />
+		  	</div>';
+			}
+			$table .= '<br /> <br />
 
 		  	<!-- Table -->
 		  	<table class="table table-bordered" id="manageSectionTable">
 			    <thead>	
 			    	<tr>
 			    		<th> Section Name </th>
-			    		<th> Teacher Name  </th>
-			    		<th> Action </th>
-			    	</tr>
+			    		<th> Teacher Name  </th>';
+						if($this->session->role=='admin'){
+							$table .= '<th> Action </th>';
+						}
+						$table .= '</tr>
 			    </thead>
 			    <tbody>';
 			    	if($sectionData) {
@@ -71,10 +73,11 @@ class Section extends MY_Controller
 
 				    		$table .= '<tr>
 				    			<td>'.$value['section_name'].'</td>
-				    			<td>'.$teacherData['fname'].' '.$teacherData['lname'].'</td>
-				    			<td>'.$button.'</td>
-				    		</tr>
-				    		';
+				    			<td>'.$teacherData['fname'].' '.$teacherData['lname'].'</td>';
+								if($this->session->role=='admin'){
+									$table .= '<td>'.$button.'</td>';
+								}
+							$table .= '</tr>';
 				    	} // /foreach				    	
 			    	} 
 			    	else {

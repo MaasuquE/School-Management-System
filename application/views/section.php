@@ -1,3 +1,12 @@
+<?php  
+
+if(isset($this->session->role)){
+    $user_role = $this->session->role;
+}
+
+?>
+
+
 <ol class="breadcrumb">
   <li><a href="<?php echo base_url('dashboard') ?>">Home</a></li> 
   <li class="active">Manage Section</li>

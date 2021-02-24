@@ -117,7 +117,6 @@ class Teacher extends MY_Controller
 		else {
 			$teacherData = $this->model_teacher->fetchTeacherData();
 			$result = array('data' => array());
-
 			foreach ($teacherData as $key => $value) {
 				$button = '<!-- Single button -->
 					<div class="btn-group">
@@ -134,10 +133,12 @@ class Teacher extends MY_Controller
 
 				$result['data'][$key] = array(
 					$photo,
-					$value['fname'] . ' ' . $value['lname'],
+					$value['fname'] . ' ' . $value['lname'],			
+					$value['name'],	
 					$value['age'],
 					$value['contact'],					
-					$value['email'],				
+					$value['email'],			
+					$value['city'],		
 					$button
 				);			
 			} // /foreach

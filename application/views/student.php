@@ -1,4 +1,8 @@
 <?php 
+
+if(isset($this->session->role)){
+    $user_role = $this->session->role;
+}
 if($this->input->get('opt') == '' || !$this->input->get('opt')) {
   show_404();
 } else {

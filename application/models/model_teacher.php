@@ -52,7 +52,7 @@ class Model_Teacher extends CI_Model
 			return $result;
 		}
 
-		$sql = "SELECT * FROM teacher";
+		$sql = "SELECT * FROM teacher LEFT JOIN subject ON teacher.teacher_id=subject.teacher_id";
 		$query = $this->db->query($sql);
 		$result = $query->result_array();
 		return $result;

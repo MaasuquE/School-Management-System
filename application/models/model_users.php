@@ -92,13 +92,12 @@ class Model_Users extends CI_Model
 		}
 	}
 
-	public function student_login($student_id,$password){
+	public function student_login($student_id,$email){
 		$this->db->where('student_id',$student_id);
-		$this->db->where('password',$password);
-		$query = $this->db->get('student')->row_array();
+		$this->db->where('email',$email);
+		$query = $this->db->get('student');
 		if($query->num_rows() > 0){
-			$result =$query->row_array();
-			return $result->student_id;
+			return true;
 		}
 		else{
 			return false;
@@ -106,17 +105,12 @@ class Model_Users extends CI_Model
 
 	}
 
-	public function teacher_login($teacher_id,$password){
-		// $this->db->where('teacher_id',$teacher_id);
-		$this->db->select('*');
-		$this->db->from('teacher');
-		// $this->db->where('password',$password)
-		$query = $this->db->get()->result();
-		print_r($query);
-		exit;
+	public function teacher_login($teacher_id,$email){
+		$this->db->where('teacher_id',$teacher_id);
+		$this->db->where('email',$email);
+		$query =$this->db->get('teacher');
 		if($query->num_rows() > 0){
-			
-			return $query->teacher_id;
+			return true;
 		}
 		else{
 			return false;

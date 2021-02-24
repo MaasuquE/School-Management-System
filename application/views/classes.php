@@ -1,3 +1,11 @@
+<?php  
+
+if(isset($this->session->role)){
+    $user_role = $this->session->role;
+}
+
+?>
+
 <ol class="breadcrumb">
   <li><a href="<?php echo base_url('dashboard') ?>">Home</a></li> 
   <li class="active">Manage Class</li>
@@ -9,13 +17,13 @@
   </div>
   <div class="panel-body">  	    
       <div id="messages"></div>
-
+      <?php if($user_role=='admin'){ ?>
     	<div class="pull pull-right">
     		<button type="button" class="btn btn-info" data-toggle="modal" data-target="#addClass" id="addClassModelBtn"> 
     			<i class="glyphicon glyphicon-plus-sign"></i> Add Class
     		</button>
     	</div>
-
+      <?php } ?>
     	<br /> <br /> <br />
     	
     	<table id="manageClassTable" class="table table-bordered">
@@ -24,7 +32,9 @@
     				<th>#</th>
     				<th>Class Name</th>
     				<th>Numeric Name</th>
+            <?php if($user_role=='admin'){ ?>
     				<th>Action</th>
+            <?php } ?>
     			</tr>
     		</thead>
     	</table>	

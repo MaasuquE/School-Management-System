@@ -186,9 +186,11 @@ class Student extends MY_Controller
                       <th>#</th>
                       <th>Name</th>
                       <th>Class</th>
-                      <th>Section</th>
-                      <th>Action</th>
-                    </tr>
+                      <th>Section</th>';
+					  if($this->session->role != 'student'){
+						$tab['html'] .='<th>Action</th>';
+					  }
+					  $tab['html'] .='</tr>
                   </thead>
                 </table>  
 
@@ -235,7 +237,7 @@ class Student extends MY_Controller
 
 				$classData = $this->model_classes->fetchClassData($value['class_id']);
 				$sectionData = $this->model_section->fetchSectionByClassSection($value['class_id'], $value['section_id']);
-
+				if($this->session->role =='admin'){
 				$button = '<div class="btn-group">
 				  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				    Action <span class="caret"></span>
@@ -245,7 +247,7 @@ class Student extends MY_Controller
 				    <li><a href="#" data-toggle="modal" data-target="#removeStudentModal" onclick="removeStudent('.$value['student_id'].')">Remove</a></li>			    
 				  </ul>
 				</div>';
-
+				}
 				$result['data'][$key] = array(
 					$img,
 					$value['fname'] . ' ' . $value['lname'],
