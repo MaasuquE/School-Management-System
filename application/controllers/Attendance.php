@@ -237,6 +237,9 @@ class Attendance extends MY_Controller
 			    		foreach ($teacherData as $key => $value) {
 			    			// fetch attedance information through date, class id, section id, and type id
 							$attedanceData = $this->model_attendance->fetchMarkAttendance('', '', $date, $typeId, '', $value['teacher_id']);
+							echo '<pre>';
+							print_r($attedanceData);
+							exit;
 				    		$div .= '<tr>
 				    			<td>
 				    				'.$value['fname'] . ' ' . $value['lname'].'
@@ -245,7 +248,7 @@ class Attendance extends MY_Controller
 				    			<td>
 				    				<select name="attendance_status['.$x.']" id="attendance_status" class="form-control">
 				    					<option value="" '; 
-										if($attedanceData['mark'] == 0) {
+										if(isset($attedanceData['mark']) && $attedanceData['mark'] == 0) {
 											$div .= 'selected';
 										}
 										$div .= '></option>
