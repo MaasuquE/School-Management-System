@@ -27,7 +27,6 @@ class Pages extends MY_Controller
         }
 
         if($page == 'setting') {
-            $this->load->model('model_users');
             $this->load->library('session');
             $userId = $this->session->userdata('id');
             $data['userData'] = $this->model_users->fetchUserData($userId);
@@ -45,8 +44,17 @@ class Pages extends MY_Controller
             $data['totalBudget'] = $this->model_accounting->totalBudget();
         }
 
+        
+        if($page == 'notice'){
+
+            $data['notice'] = $this->model_users->display_notice();
+        }
+
         if($page == 'login') {
             $user = $this->input->get('user');
+            if($user==''){
+                $user='admin';
+            }
             $data['auth_type']=$user;
             $this->isLoggedIn();
             $this->load->view($page, $data);

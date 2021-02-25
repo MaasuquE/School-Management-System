@@ -106,7 +106,7 @@ class Users extends MY_Controller
 				}	
 				else {
 					$validator['success'] = false;
-					$data['messages'] = "Incorrect username/password combination";
+					$data['messages'] = "Incorrect Student id/Email combination";
 				} // /else
 
 			} 	
@@ -146,7 +146,7 @@ class Users extends MY_Controller
 				}	
 				else {
 					$validator['success'] = false;
-					$data['messages'] = "Incorrect username/password combination";
+					$data['messages'] = "Incorrect teacher id/Email combination";
 				} // /else
 
 			} 	
@@ -304,5 +304,8 @@ class Users extends MY_Controller
 
 		
 	}
+
+
+	
 
 }

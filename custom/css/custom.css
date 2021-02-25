@@ -105,3 +105,22 @@
     box-shadow: -1px 4px 6px -5px;
 
 }
+.notice-modal{
+
+    height: 385px;
+
+}
+.notice_action a i{
+    padding: 0px 13px;
+    font-size: 20px;
+    /* margin-left: 10px; */
+}
+.notice_action{
+    text-align: center;
+}
+.notice_action a i.glyphicon-trash:hover{
+    color: rgb(168, 13, 13);
+}
+.notice_action a i.glyphicon-edit:hover{
+    color: rgb(16, 224, 33);
+}

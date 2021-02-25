@@ -118,6 +118,14 @@ class Model_Users extends CI_Model
 
 	}
 
+		public function insert_notice($data){
 
+			return $this->db->insert('notice',$data);
+		}
+
+		public function display_notice(){
+			$this->db->join('teacher','notice.creator_id=teacher.teacher_id','LEFT');
+			return $this->db->get('notice');
+		}
 
 }

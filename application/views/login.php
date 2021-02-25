@@ -31,7 +31,7 @@
 					<div class="auth_list">
 						<a href="<?php echo base_url('login?user=').'student'; ?>"><li <?php if($auth_type=='student'){ echo 'class="active"';} ?> >Student</li></a>
 						<a href="<?php echo base_url('login?user=').'teacher'; ?>"><li <?php if($auth_type=='teacher'){ echo 'class="active"';} ?>>Teacher</li></a>
-						<a href="<?php echo base_url('login?user=').'admin'; ?>"><li <?php if($auth_type=='admin'){ echo 'class="active"';} ?>>Admin</li></a>
+						<a href="<?php echo base_url('login?user=').'admin'; ?>"><li <?php if($auth_type=='admin' || $auth_type==''){ echo 'class="active"';} ?>>Admin</li></a>
 					</div>
 					<?php  echo validation_errors('<div class="alert alert-danger">','</div>'); ?>
 		    		<?php if(isset($messages)){echo '<div class="alert alert-danger">'.$messages.'</div>';}; ?>
@@ -42,7 +42,7 @@
 				  	</div>	
 					  <div class="form-group">
 				    	<label for="password">email</label>
-				    	<input type="email" class="form-control" id="password" name="email" placeholder="Password" required>
+				    	<input type="email" class="form-control" id="password" name="email" placeholder="Email" required>
 				  	</div>
 					<?php  }elseif($auth_type=='teacher'){ ?>
 					<div class="form-group">
@@ -51,7 +51,7 @@
 				  	</div>
 					  <div class="form-group">
 				    	<label for="password">email</label>
-				    	<input type="email" class="form-control" id="password" name="email" placeholder="Password" required>
+				    	<input type="email" class="form-control" id="password" name="email" placeholder="Email" required>
 				  	</div>
 					<?php }else{ ?>
 					<div class="form-group">

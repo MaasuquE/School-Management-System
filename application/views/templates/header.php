@@ -73,6 +73,7 @@ if(isset($this->session->role)){
           </ul>
         </li>
         <li id="topNavTeacher"><a href="<?php echo base_url('teacher') ?>"> <i class="glyphicon glyphicon-briefcase"></i> Teacher</a></li>
+        <li id="topNavTeacher"><a href="<?php echo base_url('notice') ?>"> <i class="glyphicon glyphicon-tasks"></i> Notice</a></li>
 
         <li class="dropdown" id="topAttendanceMainNav">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="glyphicon glyphicon-time"></i> Attendance <span class="caret"></span></a>
@@ -80,7 +81,8 @@ if(isset($this->session->role)){
             <li id="takeAttendNav"><a href="<?php echo base_url('attendance?atd=add') ?>">Take Attendance</a></li>
             <li id="attenReport"><a href="<?php echo base_url('attendance?atd=report') ?>">Attendance Report</a></li>
           </ul>
-        </li>       
+        </li>      
+        <?php if($user_role=='admin') {?> 
         <li class="dropdown" id="topMarksheetMainNav">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="glyphicon glyphicon-duplicate"></i> Marksheet <span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -88,6 +90,7 @@ if(isset($this->session->role)){
             <li id="manageMarks"><a href="<?php echo base_url('marksheet?opt=mgmk') ?>">Manage Marks</a></li>
           </ul>
         </li>
+        <?php } ?>
         <?php if($user_role=='admin') {?>
         <li class="dropdown" id="topAccountMainNav">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="glyphicon glyphicon-indent-left"></i> Accounting <span class="caret"></span></a>
