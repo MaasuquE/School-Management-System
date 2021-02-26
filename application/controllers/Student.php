@@ -64,6 +64,11 @@ class Student extends MY_Controller
 				'field' => 'sectionName',
 				'label' => 'Section',
 				'rules' => 'required'
+			),
+			array(
+				'field' => 'password',
+				'label' => 'password',
+				'rules' => 'required'
 			)
 		);
 
@@ -76,20 +81,22 @@ class Student extends MY_Controller
 			if($create == true) {
 				$validator['success'] = true;
 				$validator['messages'] = "Successfully added";
+
+				redirect(base_url('student?opt=mgst'));
 			}
 			else {
 				$validator['success'] = false;
 				$validator['messages'] = "Error while inserting the information into the database";
+				redirect(base_url('student?opt=addst'));
 			}			
 		} 	
 		else {			
 			$validator['success'] = false;
 			foreach ($_POST as $key => $value) {
 				$validator['messages'][$key] = form_error($key);
-			}			
-		} // /else
-
-		echo json_encode($validator);
+			}
+			redirect(base_url('student?opt=addst'));			
+		} 
 	}
 
 	/*

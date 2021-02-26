@@ -11,8 +11,10 @@ class Notice extends MY_Controller
 
         $q = $this->model_users->insert_notice($data);
         if($q){
+            $this->session->set_flashdata('success_msg',"Notice Successfuly added.");
             redirect(base_url('notice'));
         }
+
     }
     public function delete_notice($id){
         $this->db->where('id',$id);
@@ -23,6 +25,12 @@ class Notice extends MY_Controller
         else{
             echo 'Have some problem';
         }
+    }
+    public function notice_details($id){
+        $data['notice']=$this->model_users->display_notice($id);
+        $this->load->view('templates/header');
+        $this->load->view('notice_details',$data);
+        $this->load->view('templates/footer');
     }
 
 }?>

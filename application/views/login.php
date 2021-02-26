@@ -39,30 +39,23 @@
 					<div class="form-group">
 				    	<label for="username">Student Id</label>
 				    	<input type="text" class="form-control" id="student_id" name="student_id" placeholder="Enter your id" autofocus required>
-				  	</div>	
-					  <div class="form-group">
-				    	<label for="password">email</label>
-				    	<input type="email" class="form-control" id="password" name="email" placeholder="Email" required>
 				  	</div>
 					<?php  }elseif($auth_type=='teacher'){ ?>
 					<div class="form-group">
 				    	<label for="username">Teacher Id</label>
 				    	<input type="text" class="form-control" id="username" name="teacher_id" placeholder="teacher id" autofocus required>
 				  	</div>
-					  <div class="form-group">
-				    	<label for="password">email</label>
-				    	<input type="email" class="form-control" id="password" name="email" placeholder="Email" required>
-				  	</div>
 					<?php }else{ ?>
 					<div class="form-group">
 				    	<label for="username">Username</label>
 				    	<input type="text" class="form-control" id="username" name="username" placeholder="Username" autofocus required>
 				  	</div>
+					  <?php } ?>
 					  <div class="form-group">
 				    	<label for="password">Password</label>
 				    	<input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
 				  	</div>
-					<?php } ?>
+					
 				  	
 					  				  						 
 				  	

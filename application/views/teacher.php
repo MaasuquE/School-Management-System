@@ -56,7 +56,7 @@ if(isset($this->session->role)){
         <h4 class="modal-title">Add Teacher</h4>
       </div>
 
-      <form class="form-horizontal" method="post" id="createTeacherForm" action="teacher/create" enctype="multipart/form-data">
+      <form class="form-horizontal" method="post"  action="teacher/create" enctype="multipart/form-data">
 
       <div class="modal-body create-modal">
       
@@ -138,6 +138,12 @@ if(isset($this->session->role)){
 				      			<option value="1">Full-Time</option>
 				      			<option value="2">Part-Time</option>
 				      		</select>
+				    	</div>
+				  	</div>
+					  <div class="form-group">
+				    	<label for="country" class="col-sm-4 control-label">Password: </label>
+				    	<div class="col-sm-8">
+				      		<input type="password" class="form-control" id="password" name="password" placeholder="Password" />
 				    	</div>
 				  	</div>
 			  		<div class="form-group">

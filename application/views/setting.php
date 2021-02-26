@@ -1,3 +1,14 @@
+<?php  
+
+if(isset($this->session->role)){
+    $user_role = $this->session->role;
+    //print_r($user_role);
+
+}
+
+?>
+
+
 <ol class="breadcrumb">
   <li><a href="<?php echo base_url('dashboard') ?>">Home</a></li> 
   <li class="active">Manage Setting</li>
@@ -13,15 +24,19 @@
 		  		<div class="col-md-12">
 		  			<div id="update-profile-message"></div>
 		  		</div>
+                
 
 		  		<div class="col-md-6">
 		  			<form action="users/updateProfile" method="post" id="updateProfileForm">
+		  				 
 		  			<fieldset>
-			    		<legend>Manage Username</legend>
+			    		<legend>Manage User</legend>
+						<?php if($user_role==='admin') {?>
 					    <div class="form-group">
 					      <label for="username">Username : </label>
 					      <input type="text" id="username" name="username" class="form-control" placeholder="Username" value="<?php echo $userData['username'] ?>">
 					    </div>
+                         <?php }?>
 					    <div class="form-group">
 					      <label for="fname">First Name : </label>
 					      <input type="text" id="fname" name="fname" class="form-control" placeholder="First Name" value="<?php echo $userData['fname'] ?>">

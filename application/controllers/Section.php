@@ -29,7 +29,11 @@ class Section extends MY_Controller
 		if($classId) {
 			$sectionData = $this->model_section->fetchSectionDataByClass($classId);
 			$classData = $this->model_classes->fetchClassData($classId);
-			
+			// echo '<pre>';
+			// print_r($classData);
+			// echo $classData['class_name'];
+			// exit;
+
 			$table = '
 
 			<div class="well">
@@ -58,9 +62,7 @@ class Section extends MY_Controller
 			    <tbody>';
 			    	if($sectionData) {
 			    		foreach ($sectionData as $key => $value) {
-
 			    			$teacherData = $this->model_teacher->fetchTeacherData($value['teacher_id']);
-
 			    			$button = '<div class="btn-group">
 							  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							    Action <span class="caret"></span>
@@ -115,17 +117,13 @@ class Section extends MY_Controller
 	*/
 	public function create($classId = null) 
 	{
+		
 		$validator = array('success' => false, 'messages' => array());
 
 		$validate_data = array(
 			array(
 				'field' => 'sectionName',
 				'label' => 'Section Name',
-				'rules' => 'required'
-			),
-			array(
-				'field' => 'teacherName',
-				'label' => 'Teacher Name',
 				'rules' => 'required'
 			)
 		);

@@ -124,3 +124,92 @@
 .notice_action a i.glyphicon-edit:hover{
     color: rgb(16, 224, 33);
 }
+.notice_board{
+    background: #caaaa769;
+    /* margin: 14px; */
+    padding: 23px;
+    padding-right: -23px;
+    width: 300px;
+    height: 300px;
+    margin: 21px;
+    border-radius: 10px;
+    box-shadow: 1px 2px 7px -2px;
+}
+.notice_title{
+    border-bottom: 1px solid royalblue;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+}
+.notice_desciption{
+    border-bottom: 1px solid royalblue;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+}
+.notice_sec{
+    margin-left: 60px;
+}
+.details_btn{
+    position: absolute;
+    background: #86d3da;
+    width: 43%;
+    top: 85%;
+    left: 25%;
+    padding-top: 5px;
+    /* margin-left: 19%; */
+    /* margin: 8px 0px 0px 64px; */
+    padding: 5px 19px;
+    border-radius: 5px;
+}
+.notice_board a{
+    text-decoration: none;
+    color: black;
+}
+.details_btn:hover{
+    background: #3d4142;
+    cursor: pointer;
+}
+.notice_board a:hover{
+    color: blanchedalmond;
+}
+.dlt_notice{
+    position: absolute;
+    bottom: 2%;
+    font-size: 23px;
+    right: 2%;
+}
+.edit_notice{
+    position: absolute;
+    top: 1%;
+    font-size: 23px;
+    right: 2%;
+}
+.notice_btn{
+    display: none;
+}
+.notice_board:hover > .notice_btn{
+    display: block;
+}
+.notice_board:hover{
+    background: #a2929069;
+}
+.edit_notice a:hover > i{
+    color: green;
+    cursor: pointer;
+}
+.dlt_notice a:hover > i{
+    color: rgb(187, 11, 55);
+}
+.notice_details{
+    margin: 15px;
+}
+.notice_details .title{
+    margin-bottom: 10px;
+}
+.notice_details span{
+    padding: 75px;
+    font-size: 17px;
+}
+.notice_details b{
+    margin-bottom: 10px;
+}
+

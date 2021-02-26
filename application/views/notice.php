@@ -15,7 +15,9 @@ if(isset($this->session->role)){
     <fieldset>
     	<legend>Notice</legend>    	
 
-      <div id="messages"></div>	
+      <?php if($msg = $this->session->flashdata('success_msg')){ echo '<div id="messages" class="alert alert-success" role="alert">'.$msg.'</div>'; 
+			$this->session->unset_userdata('success_msg');
+		} ?>	
     	<?php if($user_role!='student'){ ?>
     	<div class="pull pull-right">
     		<button type="button" class="btn btn-default" data-toggle="modal" data-target="#addTeacher" id="addTeacherModelBtn"> 
@@ -23,44 +25,33 @@ if(isset($this->session->role)){
     		</button>
     	</div><br /><br />
 		<?php } ?>
-    	<table id="manageNoticeTable" class="table table-bordered">
-    		<thead>
-    			<tr>
-    				<th>SL No.</th>
-    				<th>Notice title</th>
-    				<th>Description</th>
-    				<th>Noticed By</th>
-    				<th>Noticed On</th>
-					<?php if($user_role!='student'){ ?>
-    				<th style="text-align:center">Action</th>
-					<?php } ?>
-    			</tr>
-    		</thead>
-			<tbody>
-				<?php if($notice->num_rows() > 0){
-					$i=1;
-					foreach($notice->result() as $row){ ?>
-					<tr>
-						<td><?php echo $i++; ?></td>
-						<td><?php echo $row->title; ?></td>
-						<td><?php echo $row->description; ?></td>
-						<td><?php if($row->creator_role=='admin'){ echo 'Admin';}else{ echo $row->fname.' '.$row->lname.' Sir';}; ?></td>
-						<td><?php echo $row->created; ?></td>
-						<?php if($user_role!='student'){ ?>
-						<td class="notice_action">
-							<a href=""><i class="glyphicon glyphicon-edit"></i></a>
-							<a href="<?php echo base_url('notice/delete_notice/'.$row->id) ?>"><i class="glyphicon glyphicon-trash"></i></a>
-						</td>
-						<!-- <td><select name="" id="">
-							<option value="" selected disabled>Action</option>
-							<option value="">Edit</option>
-							<option value="">delete</option>
-						</select></td> -->
-						<?php } ?>
-					</tr>
-					<?php }} ?>
-			</tbody>
-    	</table>	
+
+		<div class="row notice_sec">
+		<?php if($notice->num_rows() > 0){
+			$i=1;
+			foreach($notice->result() as $row){ ?>
+			<div class="col-md-4 notice_board">
+				<h4 style="text-align:center">Notice-<?php echo $i++; ?></h4>
+				<div class="notice_title"><b>Title: </b><?php echo $row->title; ?></div>
+				<div class="notice_desciption"><b>Description: </b><?php echo substr($row->description,0,50); ?></div>
+				<div class="row created_part">
+					<div class="col-md-6">
+						<b>Noticed By:</b> <br>
+						<?php if($row->creator_role=='admin'){ echo 'Admin';}else{ echo $row->fname.' '.$row->lname.' Sir';}; ?>
+					</div>
+					<div class="col-md-6">
+						<b>Noticed On:</b> <br>
+						<?php echo $row->created; ?>
+					</div>
+				</div>
+				<a href="<?php echo base_url('notice_details/'.$row->id); ?>"><div class="details_btn">Show Details</div></a>
+				<div class="edit_notice notice_btn"><a href=""><i class="glyphicon glyphicon-edit"></i></a></div>
+				<div class="dlt_notice notice_btn"><a href="<?php echo base_url('delete_notice/'.$row->id); ?>"><i class="glyphicon glyphicon-trash"></i></a></div>
+			</div>
+			<?php  }} ?>
+		</div>
+		
+    	
 
     </fieldset>	
   </div>
@@ -109,3 +100,6 @@ if(isset($this->session->role)){
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+
+<script type="text/javascript" src="<?php echo base_url('custom/js/notice.js') ?>"></script>

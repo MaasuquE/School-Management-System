@@ -31,7 +31,8 @@ class Model_Teacher extends CI_Model
 			'address'		=> $this->input->post('address'),
 			'city'			=> $this->input->post('city'),
 			'country'		=> $this->input->post('country'),
-			'job_type'		=> $this->input->post('jobType')
+			'job_type'		=> $this->input->post('jobType'),
+			'password'		=> $this->input->post('password')
 		);
 
 		$status = $this->db->insert('teacher', $insert_data);		

@@ -28,8 +28,12 @@ class Pages extends MY_Controller
 
         if($page == 'setting') {
             $this->load->library('session');
-            $userId = $this->session->userdata('id');
-            $data['userData'] = $this->model_users->fetchUserData($userId);
+            $userId = $this->session->id;
+            $userRole=$this->session->role;
+            $data['userData'] = $this->model_users->fetchUserData($userId,$userRole);
+            // echo '<pre>';
+            // print_r($data);
+            // exit;
         }
 
         if($page == 'dashboard') {

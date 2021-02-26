@@ -53,30 +53,36 @@ class Model_Users extends CI_Model
 		}
 	}
 
-	public function fetchUserData($userId = null) 
+	public function fetchUserData($userId,$userRole) 
 	{
-		if($userId) {
-			$sql = "SELECT * FROM users WHERE user_id = ?";
-			$query = $this->db->query($sql, array($userId));
-			return $query->row_array();
+		if($userRole=='admin'){
+			$userTable = 'users';
+			$id='id';
 		}
+		else{
+			$userTable = $userRole;
+			$id= $userRole.'_id';
+		}
+		$sql = "SELECT * FROM $userTable WHERE $id = ?";
+		$query = $this->db->query($sql, array($userId));
+		return $query->row_array();
 	}
 
-	public function updateProfile($userId = null)
-	{
-		if($userId) {
-			$update_data = array(
-				'username' => $this->input->post('username'),
-				'fname' => $this->input->post('fname'),
-				'lname' => $this->input->post('lname'),
-				'email' => $this->input->post('email')
-			);
+	// public function updateProfile($userId = null)
+	// {
+	// 	if($userId) {
+	// 		$update_data = array(
+	// 			'username' => $this->input->post('username'),
+	// 			'fname' => $this->input->post('fname'),
+	// 			'lname' => $this->input->post('lname'),
+	// 			'email' => $this->input->post('email')
+	// 		);
 
-			$this->db->where('user_id', $userId);
-			$status = $this->db->update('users', $update_data);
-			return ($status == true ? true : false);
-		}
-	}
+	// 		$this->db->where('user_id', $userId);
+	// 		$status = $this->db->update('users', $update_data);
+	// 		return ($status == true ? true : false);
+	// 	}
+	// }
 
 	public function changePassword($userId = null)
 	{
@@ -92,9 +98,9 @@ class Model_Users extends CI_Model
 		}
 	}
 
-	public function student_login($student_id,$email){
+	public function student_login($student_id,$password){
 		$this->db->where('student_id',$student_id);
-		$this->db->where('email',$email);
+		$this->db->where('password',$password);
 		$query = $this->db->get('student');
 		if($query->num_rows() > 0){
 			return true;
@@ -105,9 +111,9 @@ class Model_Users extends CI_Model
 
 	}
 
-	public function teacher_login($teacher_id,$email){
+	public function teacher_login($teacher_id,$password){
 		$this->db->where('teacher_id',$teacher_id);
-		$this->db->where('email',$email);
+		$this->db->where('password',$password);
 		$query =$this->db->get('teacher');
 		if($query->num_rows() > 0){
 			return true;
@@ -123,9 +129,59 @@ class Model_Users extends CI_Model
 			return $this->db->insert('notice',$data);
 		}
 
-		public function display_notice(){
+		public function display_notice($id=null){
+			if($id){
+				$this->db->where('id',$id);
+				$this->db->join('teacher','notice.creator_id=teacher.teacher_id','LEFT');
+				return $this->db->get('notice');
+			}
 			$this->db->join('teacher','notice.creator_id=teacher.teacher_id','LEFT');
 			return $this->db->get('notice');
 		}
 
-}
+		public function updateProfile($userId = null)
+	{
+		if($userId) {
+			$update_data = array(
+				'username' => $this->input->post('username'),
+				'fname' => $this->input->post('fname'),
+				'lname' => $this->input->post('lname'),
+				'email' => $this->input->post('email')
+			);
+
+			$this->db->where('user_id', $userId);
+			$status = $this->db->update('users', $update_data);
+			return ($status == true ? true : false);
+		}
+	}
+	public function updateProfileTeacher($teacherId = null)
+	{
+		if($teacherId) {
+			$update_data = array(
+				
+				'fname' => $this->input->post('fname'),
+				'lname' => $this->input->post('lname'),
+				'email' => $this->input->post('email')
+			);
+
+			$this->db->where('teacher_id', $teacherId);
+			$status = $this->db->update('teacher', $update_data);
+			return ($status == true ? true : false);
+		}
+	}
+	public function updateProfileStudent($studentId = null)
+	{
+		if($studentId) {
+			$update_data = array(
+				
+				'fname' => $this->input->post('fname'),
+				'lname' => $this->input->post('lname'),
+				'email' => $this->input->post('email')
+			);
+
+			$this->db->where('student_id', $studentId);
+			$status = $this->db->update('student', $update_data);
+			return ($status == true ? true : false);
+		}
+	}
+}?>

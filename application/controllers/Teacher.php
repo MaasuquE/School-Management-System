@@ -55,6 +55,11 @@ class Teacher extends MY_Controller
 				'field' => 'jobType',
 				'label' => 'Job Type',
 				'rules' => 'required'
+			),
+			array(
+				'field' => 'password',
+				'label' => 'password',
+				'rules' => 'required'
 			)
 		);
 
@@ -78,9 +83,8 @@ class Teacher extends MY_Controller
 			foreach ($_POST as $key => $value) {
 				$validator['messages'][$key] = form_error($key);
 			}			
-		} // /else
-
-		echo json_encode($validator);
+		}
+		redirect('teacher');
 	}
 
 	/*

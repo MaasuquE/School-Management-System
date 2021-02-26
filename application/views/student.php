@@ -47,7 +47,7 @@ if($this->input->get('opt') == '' || !$this->input->get('opt')) {
       if($this->input->get('opt') == 'addst') {
         // echo "Add Student";
         ?>
-        <form action="<?php echo base_url('student/create') ?>" method="post" id="createStudentForm" enctype="multipart/form-data">  
+        <form action="<?php echo base_url('student/create') ?>" method="post" enctype="multipart/form-data">  
           <div class="col-md-7">
           <fieldset>
             <legend>Student Info</legend>
@@ -123,6 +123,10 @@ if($this->input->get('opt') == '' || !$this->input->get('opt')) {
                 <option value="">Select Class</option>
               </select>
             </div>
+            <div class="form-group">
+              <label for="country">Passord</label>
+                <input type="text" class="form-control" id="password" name="password" placeholder="Country" autocomplete="off">
+            </div>  
           </fieldset>       
 
           <fieldset>

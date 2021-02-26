@@ -83,12 +83,12 @@ class Users extends MY_Controller
 			$validator = array('success' => false, 'messages' => array());
 
 			$this->form_validation->set_rules('student_id', 'student_id', 'trim|required');
-			$this->form_validation->set_rules('email', 'email', 'trim|required');
+			$this->form_validation->set_rules('password', 'password', 'trim|required');
 
 			if($this->form_validation->run() === true) {			
 				$student_id = $this->input->post('student_id');
-				$email = $this->input->post('email');
-				$student_login = $this->model_users->student_login($student_id,$email);
+				$password = $this->input->post('password');
+				$student_login = $this->model_users->student_login($student_id,$password);
 				if($student_login) {
 					$this->load->library('session');
 
@@ -106,7 +106,7 @@ class Users extends MY_Controller
 				}	
 				else {
 					$validator['success'] = false;
-					$data['messages'] = "Incorrect Student id/Email combination";
+					$data['messages'] = "Incorrect Student id/Password combination";
 				} // /else
 
 			} 	
@@ -123,12 +123,12 @@ class Users extends MY_Controller
 			$validator = array('success' => false, 'messages' => array());
 
 			$this->form_validation->set_rules('teacher_id', 'teacher_id', 'trim|required');
-			$this->form_validation->set_rules('email', 'email', 'trim|required');
+			$this->form_validation->set_rules('password', 'password', 'trim|required');
 
 			if($this->form_validation->run() === true) {			
 				$teacher_id = $this->input->post('teacher_id');
-				$email = $this->input->post('email');
-				$teacher_login = $this->model_users->teacher_login($teacher_id,$email);
+				$password = $this->input->post('password');
+				$teacher_login = $this->model_users->teacher_login($teacher_id,$password);
 				if($teacher_login) {
 					$this->load->library('session');
 
@@ -146,7 +146,7 @@ class Users extends MY_Controller
 				}	
 				else {
 					$validator['success'] = false;
-					$data['messages'] = "Incorrect teacher id/Email combination";
+					$data['messages'] = "Incorrect teacher id/Password combination";
 				} // /else
 
 			} 	
@@ -186,8 +186,10 @@ class Users extends MY_Controller
 	{
 		$this->load->library('session');
 		$userId = $this->session->userdata('id');
-
-		$validator = array('success' => false, 'messages' => array());
+        		$userRole = $this->session->userdata('role');
+         if($userRole==='admin')
+         {
+         	$validator = array('success' => false, 'messages' => array());
 
 		$validate_data = array(
 			array(
@@ -199,7 +201,20 @@ class Users extends MY_Controller
 				'field' => 'fname',
 				'label' => 'First Name',
 				'rules' => 'required'
+			),
+			array(
+				'field' => 'lname',
+				'label' => 'Last Name',
+				'rules' => 'required'
+			),
+			array(
+				'field' => 'email',
+				'label' => 'Email',
+				'rules' => 'required'
 			)
+
+
+
 		);
 
 		$this->form_validation->set_rules($validate_data);
@@ -224,6 +239,107 @@ class Users extends MY_Controller
 		} // /else
 
 		echo json_encode($validator);
+         }
+         if($userRole==='teacher')
+         {
+         	$validator = array('success' => false, 'messages' => array());
+
+		$validate_data = array(
+			
+			array(
+				'field' => 'fname',
+				'label' => 'First Name',
+				'rules' => 'required'
+			),
+			array(
+				'field' => 'lname',
+				'label' => 'Last Name',
+				'rules' => 'required'
+			),
+			array(
+				'field' => 'email',
+				'label' => 'Email',
+				'rules' => 'required'
+			)
+
+
+
+		);
+
+		$this->form_validation->set_rules($validate_data);
+		$this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
+
+		if($this->form_validation->run() === true) {	
+			$update = $this->model_users->updateProfileTeacher($userId);					
+			if($update === true) {
+				$validator['success'] = true;
+				$validator['messages'] = "Successfully Update";
+			}
+			else {
+				$validator['success'] = false;
+				$validator['messages'] = "Error while inserting the information into the database";
+			}			
+		} 	
+		else {
+			$validator['success'] = false;
+			foreach ($_POST as $key => $value) {
+				$validator['messages'][$key] = form_error($key);
+			}			
+		} // /else
+
+		echo json_encode($validator);
+         }
+
+         if($userRole==='student')
+         {
+         	$validator = array('success' => false, 'messages' => array());
+
+		$validate_data = array(
+			
+			array(
+				'field' => 'fname',
+				'label' => 'First Name',
+				'rules' => 'required'
+			),
+			array(
+				'field' => 'lname',
+				'label' => 'Last Name',
+				'rules' => 'required'
+			),
+			array(
+				'field' => 'email',
+				'label' => 'Email',
+				'rules' => 'required'
+			)
+
+
+
+		);
+
+		$this->form_validation->set_rules($validate_data);
+		$this->form_validation->set_error_delimiters('<p class="text-danger">','</p>');
+
+		if($this->form_validation->run() === true) {	
+			$update = $this->model_users->updateProfileStudent($userId);					
+			if($update === true) {
+				$validator['success'] = true;
+				$validator['messages'] = "Successfully Update";
+			}
+			else {
+				$validator['success'] = false;
+				$validator['messages'] = "Error while inserting the information into the database";
+			}			
+		} 	
+		else {
+			$validator['success'] = false;
+			foreach ($_POST as $key => $value) {
+				$validator['messages'][$key] = form_error($key);
+			}			
+		} // /else
+
+		echo json_encode($validator);
+         }
+		
 	}
 
 	public function changePassword()

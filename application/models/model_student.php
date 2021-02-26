@@ -32,7 +32,8 @@ class Model_Student extends CI_Model
 			'email'			=> $this->input->post('email'),
 			'address'		=> $this->input->post('address'),
 			'city'			=> $this->input->post('city'),
-			'country'   	=> $this->input->post('country')
+			'country'   	=> $this->input->post('country'),
+			'password'   	=> $this->input->post('password')
 		);
 
 		$status = $this->db->insert('student', $insert_data);		
