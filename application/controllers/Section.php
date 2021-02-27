@@ -30,67 +30,74 @@ class Section extends MY_Controller
 			$sectionData = $this->model_section->fetchSectionDataByClass($classId);
 			$classData = $this->model_classes->fetchClassData($classId);
 			// echo '<pre>';
-			// print_r($classData);
-			// echo $classData['class_name'];
+			// print_r($sectionData);
 			// exit;
 
-			$table = '
+			$data['sectionData']=$sectionData;
+			$data['classData'] = $classData;
+			
+			
+			$this->load->view('manage_section',$data);
+			
+			// $table = '
 
-			<div class="well">
-				Class Name : '.$classData['class_name'].'
-			</div>
+			// <div class="well">
+			// 	Class Name : '.$classData['class_name'].'
+			// </div>';
+			// // echo $table;
+			// // exit;
 
-			<div id="messages"></div>';
-			if($this->session->role=='admin'){
-				$table .= '<div class="pull pull-right">
-	  			<button class="btn btn-default" data-toggle="modal" data-target="#addSectionModal" onclick="addSection('.$classId.')">Add Section</button>	
-		  	</div>';
-			}
-			$table .= '<br /> <br />
+			// $table.='<div id="messages"></div>';
+			// if($this->session->role=='admin'){
+			// 	$table .= '<div class="pull pull-right">
+	  		// 	<button class="btn btn-default" data-toggle="modal" data-target="#addSectionModal" onclick="addSection('.$classId.')">Add Section</button>	
+		  	// </div>';
+			// }
+			// $table .= '<br /> <br />
 
-		  	<!-- Table -->
-		  	<table class="table table-bordered" id="manageSectionTable">
-			    <thead>	
-			    	<tr>
-			    		<th> Section Name </th>
-			    		<th> Teacher Name  </th>';
-						if($this->session->role=='admin'){
-							$table .= '<th> Action </th>';
-						}
-						$table .= '</tr>
-			    </thead>
-			    <tbody>';
-			    	if($sectionData) {
-			    		foreach ($sectionData as $key => $value) {
-			    			$teacherData = $this->model_teacher->fetchTeacherData($value['teacher_id']);
-			    			$button = '<div class="btn-group">
-							  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							    Action <span class="caret"></span>
-							  </button>
-							  <ul class="dropdown-menu">
-							    <li><a type="button" data-toggle="modal" data-target="#editSectionModal" onclick="editSection('.$value['section_id'].','.$value['class_id'].')"> <i class="glyphicon glyphicon-edit"></i> Edit</a></li>
-							    <li><a type="button" data-toggle="modal" data-target="#removeSectionModal" onclick="removeSection('.$value['section_id'].','.$value['class_id'].')"> <i class="glyphicon glyphicon-trash"></i> Remove</a></li>		    
-							  </ul>
-							</div>';
+		  	// <!-- Table -->
+		  	// <table class="table table-bordered" id="manageSectionTable">
+			//     <thead>	
+			//     	<tr>
+			//     		<th> Section Name </th>
+			//     		<th> Teacher Name  </th>';
+			// 			if($this->session->role=='admin'){
+			// 				$table .= '<th> Action </th>';
+			// 			}
+			// 			$table .= '</tr>
+			//     </thead>
+			//     <tbody>';
+			//     	if(is_array($sectionData) || is_object($sectionData)) {
+			//     		foreach ($sectionData as $key => $value) {
+			//     			$teacherData = $this->model_teacher->fetchTeacherData($value['teacher_id']);
+			//     			$button = '<div class="btn-group">
+			// 				  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			// 				    Action <span class="caret"></span>
+			// 				  </button>
+			// 				  <ul class="dropdown-menu">
+			// 				    <li><a type="button" data-toggle="modal" data-target="#editSectionModal" onclick="editSection('.$value['section_id'].','.$value['class_id'].')"> <i class="glyphicon glyphicon-edit"></i> Edit</a></li>
+			// 				    <li><a type="button" data-toggle="modal" data-target="#removeSectionModal" onclick="removeSection('.$value['section_id'].','.$value['class_id'].')"> <i class="glyphicon glyphicon-trash"></i> Remove</a></li>		    
+			// 				  </ul>
+			// 				</div>';
 
-				    		$table .= '<tr>
-				    			<td>'.$value['section_name'].'</td>
-				    			<td>'.$teacherData['fname'].' '.$teacherData['lname'].'</td>';
-								if($this->session->role=='admin'){
-									$table .= '<td>'.$button.'</td>';
-								}
-							$table .= '</tr>';
-				    	} // /foreach				    	
-			    	} 
-			    	else {
-			    		$table .= '<tr>
-			    			<td colspan="3"><center>No Data Available</center></td>
-			    		</tr>';
-			    	} // /else
-			    $table .= '</tbody>
-			</table>
-			';
-			echo $table;
+			// 	    		$table .= '<tr>
+			// 	    			<td>'.$value['section_name'].'</td>
+			// 	    			<td>'.$teacherData->fname.' '.$teacherData->lname.'</td>';
+			// 					if($this->session->role=='admin'){
+			// 						$table .= '<td>'.$button.'</td>';
+			// 					}
+			// 				$table .= '</tr>';
+			// 	    	} // /foreach				    	
+			//     	} 
+			//     	else {
+			//     		$table .= '<tr>
+			//     			<td colspan="3"><center>No Data Available</center></td>
+			//     		</tr>';
+			//     	} // else
+			//     $table .= '</tbody>
+			// </table>
+			// ';
+			// echo $table;
 		}
 	}
 

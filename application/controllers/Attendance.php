@@ -101,9 +101,9 @@ class Attendance extends MY_Controller
 	{
 		if($classId) {
 			$sectionData = $this->model_section->fetchSectionDataByClass($classId);
-			if($sectionData) {
-				foreach ($sectionData as $key => $value) {
-					$option .= '<option value="'.$value['section_id'].'">'.$value['section_name'].'</option>';
+			if($sectionData->num_rows() > 0) {
+				foreach ($sectionData->result() as $value) {
+					$option .= '<option value="'.$value->section_id.'">'.$value->section_name.'</option>';
 				} // /foreach
 			}
 			else {
@@ -130,7 +130,7 @@ class Attendance extends MY_Controller
 			$classData = $this->model_classes->fetchClassData($classId);
 			// section infromation
 			$sectionData = $this->model_section->fetchSectionByClassSection($classId, $sectionId);
-
+			
 			$div = '
 			
 		    <div class="well">
@@ -156,7 +156,8 @@ class Attendance extends MY_Controller
 			    		foreach ($studentData as $key => $value) {
 			    			// fetch attedance information through date, class id, section id, and type id
 							$attedanceData = $this->model_attendance->fetchMarkAttendance($classId, $sectionId, $date, $typeId, $value['student_id']);
-				    		$div .= '<tr>
+				    		if($attedanceData!=false){
+							$div .= '<tr>
 				    			<td>
 				    				'.$value['fname'] . ' ' . $value['lname'].'
 				    				<input type="hidden" name="studentId['.$x.']" id="studentId" value="'.$value['student_id'].'" />
@@ -187,6 +188,7 @@ class Attendance extends MY_Controller
 				    			</td>
 				    		</tr>';
 				    		$x++;
+									}
 				    	} // /foreach
 			    	} // /if
 			    	else {
@@ -208,14 +210,15 @@ class Attendance extends MY_Controller
 
 		    </form>
 			';
-
+			
 			echo $div;
+				
 		} 
 		else if($typeId == 2) {
 
 			// teacher data
 			$teacherData = $this->model_teacher->fetchTeacherData();
-
+			
 			$div = '<div class="well">
 			    	Attendance Type : Teacher
 			    </div>		
@@ -237,9 +240,10 @@ class Attendance extends MY_Controller
 			    		foreach ($teacherData as $key => $value) {
 			    			// fetch attedance information through date, class id, section id, and type id
 							$attedanceData = $this->model_attendance->fetchMarkAttendance('', '', $date, $typeId, '', $value['teacher_id']);
-							echo '<pre>';
-							print_r($attedanceData);
-							exit;
+							// echo '<pre>';
+							// print_r($attedanceData);
+							// exit;
+							if($attendanceData!=false){
 				    		$div .= '<tr>
 				    			<td>
 				    				'.$value['fname'] . ' ' . $value['lname'].'
@@ -271,6 +275,7 @@ class Attendance extends MY_Controller
 				    			</td>
 				    		</tr>';
 				    		$x++;
+									}
 				    	} // /foreach
 			    	} // /if
 			    	else {

@@ -18,7 +18,9 @@ class Pages extends MY_Controller
 
             $this->load->model('model_teacher');
             $data['teacherData'] = $this->model_teacher->fetchTeacherData();
-
+            // echo '<pre>';
+            // print_r($data['teacherData']);
+            // exit;
             
             $this->load->model('model_accounting');
             $data['totalIncome'] = $this->model_accounting->totalIncome();

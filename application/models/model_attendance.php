@@ -77,7 +77,11 @@ class Model_Attendance extends CI_Model
 			if($classId && $sectionId && $date && $typeId) {
 				$sql = "SELECT * FROM attendance WHERE class_id = ? AND section_id = ? AND attendance_date = ? AND attendance_type = ? AND student_id = ?";
 				$query = $this->db->query($sql, array($classId, $sectionId, $date, $typeId, $studentId));
-				return $query->row_array();
+				if($query->num_rows() > 0){
+					return $query->row_array();
+				}else{
+					return false;
+				}
 			}
 		}
 		else if($typeId == 2) {
@@ -85,7 +89,11 @@ class Model_Attendance extends CI_Model
 			if($teacherId && $date && $typeId) {
 				$sql = "SELECT * FROM attendance WHERE attendance_date = ? AND attendance_type = ? AND teacher_id = ?";
 				$query = $this->db->query($sql, array($date, $typeId, $teacherId));
-				return $query->row_array();
+				if($query->num_rows() > 0){
+					return $query->row_array();
+					}else{
+						return false;
+					}
 			}
 		}			
 	}

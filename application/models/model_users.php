@@ -57,7 +57,7 @@ class Model_Users extends CI_Model
 	{
 		if($userRole=='admin'){
 			$userTable = 'users';
-			$id='id';
+			$id='user_id';
 		}
 		else{
 			$userTable = $userRole;

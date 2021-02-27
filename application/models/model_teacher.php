@@ -53,11 +53,20 @@ class Model_Teacher extends CI_Model
 			return $result;
 		}
 
-		$sql = "SELECT * FROM teacher LEFT JOIN subject ON teacher.teacher_id=subject.teacher_id";
+		$sql = "SELECT * FROM teacher ";
 		$query = $this->db->query($sql);
 		$result = $query->result_array();
 		return $result;
 	}
+	// public function fetchTeacherData_for_subject($teacherId)	
+	// {
+		
+	// 		$sql = "SELECT * FROM teacher WHERE teacher_id = ?";
+	// 		$query = $this->db->query($sql, array($teacherId));
+	// 		$result = $query->result_array();
+	// 		return $result;
+
+	// }
 
 	/*
 	*------------------------------------

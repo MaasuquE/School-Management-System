@@ -125,7 +125,7 @@ if($this->input->get('opt') == '' || !$this->input->get('opt')) {
             </div>
             <div class="form-group">
               <label for="country">Passord</label>
-                <input type="text" class="form-control" id="password" name="password" placeholder="Country" autocomplete="off">
+                <input type="text" class="form-control" id="password" name="password" placeholder="Password" autocomplete="off">
             </div>  
           </fieldset>       
 

@@ -79,7 +79,7 @@ if(isset($this->session->role)){
 		    <label for="teacherName">Teacher : </label>
 		    <select class="form-control" name="teacherName" id="teacherName">
 		    	<option value="">Select a Teacher</option>
-		    	<?php 
+		    	<?php
 		    	if($teacherData) { 
 	    			foreach ($teacherData as $key => $value): ?>
 			    		<option value="<?php echo $value['teacher_id'] ?>"><?php echo $value['fname'] . ' ' . $value['lname'] ?></option>

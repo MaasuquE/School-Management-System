@@ -17,7 +17,7 @@ class Model_Section extends CI_Model
 		if($classId) {
 			$sql = "SELECT * FROM section WHERE class_id = ?";
 			$query = $this->db->query($sql, array($classId));
-			return $query->row_array();
+			return $query;
 		}
 	}
 

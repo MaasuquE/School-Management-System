@@ -17,7 +17,7 @@ class Model_Subject extends CI_Model
 		if($classId) {
 			$sql = "SELECT * FROM subject WHERE class_id = ?";
 			$query = $this->db->query($sql, array($classId));
-			return $query->result_array();
+			return $query;
 		}
 	}
 

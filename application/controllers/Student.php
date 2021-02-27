@@ -127,11 +127,12 @@ class Student extends MY_Controller
 	*/
 	public function fetchClassSection($classId = null)
 	{
+		
 		if($classId) {
 			$sectionData = $this->model_section->fetchSectionDataByClass($classId);
-			if($sectionData) {
-				foreach ($sectionData as $key => $value) {
-					$option .= '<option value="'.$value['section_id'].'">'.$value['section_name'].'</option>';
+			if($sectionData->num_rows() > 0) {
+				foreach ($sectionData->result() as $key => $value) {
+					$option .= '<option value="'.$value->section_id.'">'.$value->section_name.'</option>';
 				} // /foreach
 			}
 			else {
@@ -175,8 +176,8 @@ class Student extends MY_Controller
             <li role="presentation" class="active"><a href="#classStudent" aria-controls="classStudent" role="tab" data-toggle="tab">All Student</a></li>              
             ';            	
             	$x = 1;
-            	foreach ($sectionData as $key => $value) {            	
-					$tab['html'] .= '<li role="presentation"><a href="#countSection'.$x.'" aria-controls="countSection" role="tab" data-toggle="tab"> Section ('.$value['section_name'].')</a></li>';
+            	foreach ($sectionData->result() as  $value) {            	
+					$tab['html'] .= '<li role="presentation"><a href="#countSection'.$x.'" aria-controls="countSection" role="tab" data-toggle="tab"> Section ('.$value->section_name.')</a></li>';
 					$x++;
 				} // /foreach              
             $tab['html'] .= '</ul>
@@ -203,12 +204,12 @@ class Student extends MY_Controller
 
               </div>'; 
               	$x = 1;
-				foreach ($sectionData as $key => $value) {
+				foreach ($sectionData->result() as $value) {
 					$tab['html'] .= '<div role="tabpanel" class="tab-pane" id="countSection'.$x.'">
 						<br /> 
 						<div class="well well-sm">
-							Class : '.$classData['class_name'].' <br /> 
-							Section : '.$value['section_name'].'							
+							Class : '.$classData->class_name.' <br /> 
+							Section : '.$value->section_name.'							
 						</div>
 
 						<table class="table table-bordered classSectionStudentTable" id="manageStudentTable'.$x.'" style="width:100%;">
@@ -243,7 +244,7 @@ class Student extends MY_Controller
 				$img = '<img src="'.base_url() . $value['image'].'" class="img-circle candidate-photo" alt="Student Image" />';
 
 				$classData = $this->model_classes->fetchClassData($value['class_id']);
-				$sectionData = $this->model_section->fetchSectionByClassSection($value['class_id'], $value['section_id']);
+				$sectionData = $this->model_section->fetchSectionByClassSection($value['class_id'], $value['section_id'])->row_array();
 				if($this->session->role =='admin'){
 				$button = '<div class="btn-group">
 				  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">

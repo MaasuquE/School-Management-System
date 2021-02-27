@@ -189,9 +189,9 @@ class Accounting extends MY_Controller
 		if($classId) {
 			$sectionData = $this->model_section->fetchSectionDataByClass($classId);
 			$option = '';
-			if($sectionData) {
-				foreach ($sectionData as $key => $value) {
-					$option .= '<option value="'.$value['section_id'].'">'.$value['section_name'].'</option>';
+			if($sectionData->num_rows()>0) {
+				foreach ($sectionData->result() as $value) {
+					$option .= '<option value="'.$value->section_id.'">'.$value->section_name.'</option>';
 				} // /foreach
 			}
 			else {
