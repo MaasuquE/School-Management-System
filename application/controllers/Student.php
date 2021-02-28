@@ -167,6 +167,8 @@ class Student extends MY_Controller
 	{
 		if($classId) {
 			$sectionData = $this->model_section->fetchSectionDataByClass($classId);	
+			print_r($sectionData->row_array());
+			exit;
 			$classData = $this->model_classes->fetchClassData($classId);									
 			$tab = array();			
 			$tab['sectionData'] = $sectionData;			
@@ -238,33 +240,38 @@ class Student extends MY_Controller
 
 	public function fetchStudentByClass($classId = null) {
 		if($classId) {
-			$result = array('data' => array());
-			$studentData = $this->model_student->fetchStudentDataByClass($classId);
-			foreach ($studentData as $key => $value) {
-				$img = '<img src="'.base_url() . $value['image'].'" class="img-circle candidate-photo" alt="Student Image" />';
+			$data['studentData'] = $this->model_student->fetchStudentDataByClassAll($classId);
+			print_r($data);
+			exit;
+			// $data$['classData'] = $this->model_classes->fetchClassData($value['class_id']);
+			// $data['sectionData'] = $this->model_section->fetchSectionByClassSection($value['class_id'], $value['section_id']);
+			//$img = '<img src="'.base_url() . $value['image'].'" class="img-circle candidate-photo" alt="Student Image" />';
+			$this->load->view('student_manage',$data);
+			
+			// foreach ($studentData as $key => $value) {
+				
 
-				$classData = $this->model_classes->fetchClassData($value['class_id']);
-				$sectionData = $this->model_section->fetchSectionByClassSection($value['class_id'], $value['section_id'])->row_array();
-				if($this->session->role =='admin'){
-				$button = '<div class="btn-group">
-				  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-				    Action <span class="caret"></span>
-				  </button>
-				  <ul class="dropdown-menu">			  	
-				    <li><a href="#" data-toggle="modal" data-target="#editStudentModal" onclick="updateStudent('.$value['student_id'].')">Edit</a></li>
-				    <li><a href="#" data-toggle="modal" data-target="#removeStudentModal" onclick="removeStudent('.$value['student_id'].')">Remove</a></li>			    
-				  </ul>
-				</div>';
-				}
-				$result['data'][$key] = array(
-					$img,
-					$value['fname'] . ' ' . $value['lname'],
-					$classData['class_name'],
-					$sectionData['section_name'],
-					$button
-				);
-			} // /foreach	
-			echo json_encode($result);
+				
+			// 	if($this->session->role =='admin'){
+			// 	$button = '<div class="btn-group">
+			// 	  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			// 	    Action <span class="caret"></span>
+			// 	  </button>
+			// 	  <ul class="dropdown-menu">			  	
+			// 	    <li><a href="#" data-toggle="modal" data-target="#editStudentModal" onclick="updateStudent('.$value['student_id'].')">Edit</a></li>
+			// 	    <li><a href="#" data-toggle="modal" data-target="#removeStudentModal" onclick="removeStudent('.$value['student_id'].')">Remove</a></li>			    
+			// 	  </ul>
+			// 	</div>';
+			// 	}
+			// 	$result['data'][$key] = array(
+			// 		$img,
+			// 		$value['fname'] . ' ' . $value['lname'],
+			// 		$classData['class_name'],
+			// 		$sectionData['section_name'],
+			// 		$button
+			// 	);
+			// } // /foreach	
+			// echo json_encode($result);
 		}
 	}
 

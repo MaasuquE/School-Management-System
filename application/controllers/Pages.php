@@ -33,9 +33,6 @@ class Pages extends MY_Controller
             $userId = $this->session->id;
             $userRole=$this->session->role;
             $data['userData'] = $this->model_users->fetchUserData($userId,$userRole);
-            // echo '<pre>';
-            // print_r($data);
-            // exit;
         }
 
         if($page == 'dashboard') {

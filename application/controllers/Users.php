@@ -93,7 +93,7 @@ class Users extends MY_Controller
 					$this->load->library('session');
 
 					$user_data = array(
-						'id' => $student_login,
+						'id' => $student_id,
 						'role'=> $user,
 						'logged_in' => true
 					);

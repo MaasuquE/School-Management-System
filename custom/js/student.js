@@ -177,32 +177,31 @@ function getClassSection(classId = null)
 		$(".list-group-item").removeClass('active');
 		$("#classId"+classId).addClass('active');
 		$.ajax({
-			url: base_url + 'student/getClassSectionTab/'+classId,
+			url: base_url + 'student/fetchStudentByClass/'+classId,
 			type: 'post',
-			dataType: 'json',
 			success:function(response) {
-				$("#result").html(response.html);
+				$("#result").html(response);
 
-				manageStudentTable = $("#manageStudentTable").DataTable({
-					'ajax' : 'student/fetchStudentByClass/'+classId,
-					'order' : []
-				});
+				// manageStudentTable = $("#manageStudentTable").DataTable({
+				// 	'ajax' : 'student/fetchStudentByClass/'+classId,
+				// 	'order' : []
+				// });
 				
-				/*
-				*-------------------------------------
-				* retrives from the getclassectiontab
-				* function as a json format
-				* and stores the section table into 
-				* the object 
-				*-------------------------------------
-				*/
-				$.each(response.sectionData, function(index, value) {					
-					index += 1;										
-					studentSectionTable['studentTable' + index] = $("#manageStudentTable"+index).DataTable({
-						'ajax' : 'student/fetchStudentByClassAndSection/'+value.class_id+'/'+value.section_id,
-						'order': []
-					});					
-				});																				
+				// /*
+				// *-------------------------------------
+				// * retrives from the getclassectiontab
+				// * function as a json format
+				// * and stores the section table into 
+				// * the object 
+				// *-------------------------------------
+				// */
+				// $.each(response.sectionData, function(index, value) {					
+				// 	index += 1;										
+				// 	studentSectionTable['studentTable' + index] = $("#manageStudentTable"+index).DataTable({
+				// 		'ajax' : 'student/fetchStudentByClassAndSection/'+value.class_id+'/'+value.section_id,
+				// 		'order': []
+				// 	});					
+				// });																				
 			} // /success
 		}); // /ajax		
 	}

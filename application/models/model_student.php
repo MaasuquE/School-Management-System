@@ -68,6 +68,21 @@ class Model_Student extends CI_Model
 		} // /if
 	} 
 
+	public function fetchStudentDataByClassAll($classId){
+		
+	$query=$this->db->select('*')	
+				 ->from('student')
+				 ->where('class_id',$classId)
+				 ->get();
+	return $query->result_array();
+		if($query->num_rows() > 0){
+			
+		}
+		else{
+			return false;
+		}
+	}
+
 	/*
 	*--------------------------------------------------
 	* fetches the student infro via class and section id
