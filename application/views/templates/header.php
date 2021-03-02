@@ -81,16 +81,15 @@ if(isset($this->session->role)){
             <li id="takeAttendNav"><a href="<?php echo base_url('attendance?atd=add') ?>">Take Attendance</a></li>
             <li id="attenReport"><a href="<?php echo base_url('attendance?atd=report') ?>">Attendance Report</a></li>
           </ul>
-        </li>      
-        <?php if($user_role=='admin') {?> 
+        </li>
         <li class="dropdown" id="topMarksheetMainNav">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="glyphicon glyphicon-duplicate"></i> Marksheet <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li id="manageMarksheet"><a href="<?php echo base_url('marksheet?opt=mngms') ?>">Manage Marksheet</a></li>
             <li id="manageMarks"><a href="<?php echo base_url('marksheet?opt=mgmk') ?>">Manage Marks</a></li>
+            <li id="manageMarks"><a href="<?php echo base_url('marksheet?opt=addmk') ?>">Add Marks</a></li>
           </ul>
         </li>
-        <?php } ?>
         <?php if($user_role=='admin') {?>
         <li class="dropdown" id="topAccountMainNav">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="glyphicon glyphicon-indent-left"></i> Accounting <span class="caret"></span></a>

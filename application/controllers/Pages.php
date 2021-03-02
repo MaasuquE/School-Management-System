@@ -12,15 +12,12 @@ class Pages extends MY_Controller
 
         $data['title'] = ucfirst($page); // Capitalize the first letter
 
-        if($page == 'section' || $page == 'subject' || $page == 'student' || $page == 'marksheet' || $page == 'accounting') {
+        if($page == 'section' || $page == 'subject' || $page == 'student' || $page == 'teacher' || $page == 'marksheet' || $page == 'accounting') {
             $this->load->model('model_classes');
             $data['classData'] = $this->model_classes->fetchClassData();
 
             $this->load->model('model_teacher');
             $data['teacherData'] = $this->model_teacher->fetchTeacherData();
-            // echo '<pre>';
-            // print_r($data['teacherData']);
-            // exit;
             
             $this->load->model('model_accounting');
             $data['totalIncome'] = $this->model_accounting->totalIncome();

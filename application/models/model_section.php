@@ -36,6 +36,13 @@ class Model_Section extends CI_Model
 			return $result;
 		}		
 	}
+	public function fetchSectionById($sectionId)
+	{
+			$sql = "SELECT * FROM section WHERE section_id = ?";
+			$query = $this->db->query($sql, array($sectionId));
+			$result = $query->row_array();
+			return $result;		
+	}
 
 	/*
 	*----------------------------------------------

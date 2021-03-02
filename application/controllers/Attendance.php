@@ -146,8 +146,11 @@ class Attendance extends MY_Controller
 			    <table class="table table-bordered">
 			    	<thead>
 			    		<tr>
-			    			<th style="width:60%;">Name</th>
-			    			<th style="width:40%;">Action</th>
+			    			<th >Name</th>
+			    			<th >Class</th>
+			    			<th >Section</th>
+			    			<th >Date</th>
+			    			<th >Action</th>
 			    		</tr>
 			    	</thead>
 			    	<tbody>';
@@ -156,13 +159,17 @@ class Attendance extends MY_Controller
 			    		foreach ($studentData as $key => $value) {
 			    			// fetch attedance information through date, class id, section id, and type id
 							$attedanceData = $this->model_attendance->fetchMarkAttendance($classId, $sectionId, $date, $typeId, $value['student_id']);
-				    		if($attedanceData!=false){
+				    		
 							$div .= '<tr>
 				    			<td>
 				    				'.$value['fname'] . ' ' . $value['lname'].'
 				    				<input type="hidden" name="studentId['.$x.']" id="studentId" value="'.$value['student_id'].'" />
 				    			</td>
-				    			<td>
+								<td>'.$classData['class_name'].'</td>
+								<td>'.$sectionData['section_name'].'</td>
+								<td>'.$date.'</td>';
+								if($attedanceData!=false){
+				    			$div .='<td>
 				    				<select name="attendance_status['.$x.']" id="attendance_status" class="form-control">
 				    					<option value="" '; 
 										if($attedanceData['mark'] == 0) {
@@ -185,10 +192,19 @@ class Attendance extends MY_Controller
 										}
 										$div .= '>Late</option>
 				    				</select>
-				    			</td>
-				    		</tr>';
+				    			</td>';
+									}else{
+									$div .='<td>
+				    				<select name="attendance_status['.$x.']" id="attendance_status" class="form-control">
+				    					<option value="0">Undefined</option>
+				    					<option value="1">Present</option>
+				    					<option value="2">Absent</option>
+				    					<option value="3">Late</option>
+				    				</select>
+				    			</td>';
+								}
+				    		$div .='</tr>';
 				    		$x++;
-									}
 				    	} // /foreach
 			    	} // /if
 			    	else {
@@ -240,16 +256,15 @@ class Attendance extends MY_Controller
 			    		foreach ($teacherData as $key => $value) {
 			    			// fetch attedance information through date, class id, section id, and type id
 							$attedanceData = $this->model_attendance->fetchMarkAttendance('', '', $date, $typeId, '', $value['teacher_id']);
-							// echo '<pre>';
-							// print_r($attedanceData);
-							// exit;
-							if($attendanceData!=false){
+							
 				    		$div .= '<tr>
 				    			<td>
 				    				'.$value['fname'] . ' ' . $value['lname'].'
 				    				<input type="hidden" name="teacherId['.$x.']" id="teacherId" value="'.$value['teacher_id'].'" />
-				    			</td>
-				    			<td>
+				    			</td>';
+								if($attedanceData!=false){
+
+								$div .='<td> <input type="hidden" name="exist_techer" value="yes" />
 				    				<select name="attendance_status['.$x.']" id="attendance_status" class="form-control">
 				    					<option value="" '; 
 										if(isset($attedanceData['mark']) && $attedanceData['mark'] == 0) {
@@ -272,10 +287,19 @@ class Attendance extends MY_Controller
 										}
 										$div .= '>Late</option>
 				    				</select>
-				    			</td>
-				    		</tr>';
+				    			</td>';
+									}else{
+										$div .='<td>
+										<select name="attendance_status['.$x.']" id="attendance_status" class="form-control">
+											<option value="0">Undefined</option>
+											<option value="1">Present</option>
+											<option value="2">Absent</option>
+											<option value="3">Late</option>
+										</select>
+									</td>';
+										}	
+				    		$div.='</tr>';
 				    		$x++;
-									}
 				    	} // /foreach
 			    	} // /if
 			    	else {

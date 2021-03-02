@@ -39,3 +39,9 @@
             <?php } ?>
         </tbody>
     </table>
+
+    <script>
+	$(document).ready( function () {
+    $('#manageSectionTable').DataTable();
+});
+</script>

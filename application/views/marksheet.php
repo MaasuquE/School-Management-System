@@ -78,7 +78,7 @@ else if($this->input->get('opt') == 'mgmk') {
 	<div class="panel-heading">Manage Marks</div>
 	  
 	<div class="panel-body">		  
-		<form method="post" action="marksheet/fetchStudentMarksheet" class="form-horizontal" id="fetchStudentMarksheet">
+		<form method="post" action="marksheet/fetchStudentMarksheet" class="form-horizontal" id="fetchStudentMarksheet" >
 		  	<div class="form-group">
 		    	<label for="className" class="col-sm-2 control-label">Class</label>
 		    	<div class="col-sm-10">
@@ -99,7 +99,7 @@ else if($this->input->get('opt') == 'mgmk') {
 		      			<option value="">Select Class</option>
 		      		</select>
 		    	</div>
-		  	</div>		  	
+		  	</div>	
 		  	<div class="form-group">
 		    	<div class="col-sm-offset-2 col-sm-10">
 		      		<button type="submit" class="btn btn-primary">Submit</button>
@@ -112,7 +112,75 @@ else if($this->input->get('opt') == 'mgmk') {
 <div id="marks-result"></div>
 
 <?php
-} // /.manage marks ?>
+} else if($this->input->get('opt') == 'addmk') {
+	// manage marks
+?>
+<div class="panel panel-default">
+  	<!-- Default panel contents -->
+	<div class="panel-heading">Add Marks</div>
+	  
+	<div class="panel-body">		  
+		<form method="post" action="marksheet/addStudentMarks" class="form-horizontal" >
+		  	<div class="form-group">
+		    	<label for="className" class="col-sm-2 control-label">Class</label>
+		    	<div class="col-sm-10">
+		    	  	<select class="form-control" name="class_id" id="className" required>
+		      			<option value="">Select</option>
+		      			<?php  
+		      			foreach ($classData as $key => $value) {
+		      				echo "<option value='".$value['class_id']."'>".$value['class_name']."</option>";
+		      			} // /.foreach for class data
+		      			?>
+		      		</select>
+		    	</div>
+		  	</div>		  	
+		  	<div class="form-group">
+		    	<label for="marksheetName" class="col-sm-2 control-label">Marksheet</label>
+		    	<div class="col-sm-10">
+		      		<select class="form-control" name="marksheet_id" id="marksheetName">
+		      			<option value="">Select Class</option>
+		      		</select>
+		    	</div>
+		  	</div>
+        <div class="form-group">
+		    	<label for="marksheetName" class="col-sm-2 control-label">Subject</label>
+		    	<div class="col-sm-10">
+		      		<select class="form-control" name="subject_id" id="subjectName">
+		      			<option value="">Select Class</option>
+		      		</select>
+		    	</div>
+		  	</div>		  
+        <div class="form-group">
+		    	<label for="marksheetName" class="col-sm-2 control-label">Student</label>
+		    	<div class="col-sm-10">
+		      		<select class="form-control" name="student_id" id="studentName" required>
+		      			<option value="">Select Class</option>
+		      		</select>
+		    	</div><br><br>
+          <div class="form-group">
+		    	<label for="marksheetName" class="col-sm-2 control-label">Marks </label>
+		    	<div class="col-sm-10">
+		      		<input type="number" name="obtain_mark" class="form-control mark_input" placeholder="Enter marks" required>
+		    	</div>
+		  	</div>		
+		  	<div class="form-group">
+		    	<div class="col-sm-offset-2 col-sm-10">
+		      		<button type="submit" class="btn btn-primary">Submit</button>
+		    	</div>
+		  	</div>
+		</form>
+	</div>			  
+</div>
+<?php $msg=''; if($this->session->flashdata('success')){
+   echo $this->session->flashdata('success'); 
+   $msg= 'success';
+  }elseif($this->session->flashdata('failed')){
+    echo $this->session->flashdata('failed');
+    $msg= 'failed';
+  }
+
+  $this->session->unset_userdata($msg);
+} // /.Add marks ?>
 
 
 <!-- create marksheet modal -->

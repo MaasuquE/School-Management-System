@@ -22,7 +22,7 @@ $(document).ready(function() {
 
 		getClassSection(classId);
 	}
-	else if(request == 'mgmk') {
+	else if(request == 'mgmk' || request == 'addmk') {
 		// manage marks
 		$("#manageMarks").addClass('active');
 
@@ -31,6 +31,8 @@ $(document).ready(function() {
 			var classId = $(this).val();
 
 			$("#marksheetName").load(base_url +'marksheet/fetchMarksheetDataByClass/'+classId);		
+			$("#subjectName").load(base_url +'marksheet/fetchSubjectDataByClass/'+classId);		
+			$("#studentName").load(base_url +'marksheet/fetchStudentDataByClass/'+classId);			
 
 			$("#fetchStudentMarksheet").unbind('submit').bind('submit', function() {
 				var form = $(this);
@@ -135,7 +137,7 @@ function addMarksheet(classId = null)
 				data: form.serialize(),
 				dataType: 'json',
 				success:function(response) {
-					
+					alert(response);
 					if(response.success == true) {						
 						$("#add-marksheet-message").html('<div class="alert alert-success alert-dismissible" role="alert">'+
 						  '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+

@@ -43,14 +43,17 @@ class Model_Attendance extends CI_Model
 		else if($typeId == 2) {
 			// teacher
 			for($x = 1; $x <= count($this->input->post('teacherId')); $x++) {						
-
-				$this->db->delete('attendance', array(
-					'attendance_date' => $this->input->post('date'), 
-					'class_id' => $this->input->post('classId'), 
-					'section_id' => $this->input->post('sectionId'), 
-					'student_id' => $this->input->post('studentId')[$x]
-				));
-
+				if($this->input->post('exist_teacher')){
+					$update_data = array(				
+						'attendance_type' 	=> $this->input->post('attendance_type'),
+						'teacher_Id'		=> $this->input->post('teacherId')[$x],					
+						'attendance_date'	=> $this->input->post('date'),
+						'mark' 				=> $this->input->post('attendance_status')[$x]			
+					);
+	
+					$status = $this->db->update('attendance', $update_data);
+				}else{
+						
 				$insert_data = array(				
 					'attendance_type' 	=> $this->input->post('attendance_type'),
 					'teacher_Id'		=> $this->input->post('teacherId')[$x],					
@@ -58,7 +61,8 @@ class Model_Attendance extends CI_Model
 					'mark' 				=> $this->input->post('attendance_status')[$x]			
 				);
 
-				$status = $this->db->insert('attendance', $insert_data);						
+				$status = $this->db->insert('attendance', $insert_data);
+				}						
 			} // /for
 
 			return ($status == true ? true : false);

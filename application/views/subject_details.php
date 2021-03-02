@@ -9,9 +9,10 @@
 		</div>
 	<?php  } ?>
     <br /> <br />
-    <table class="table table-bordered" >
+    <table id="subjectDetails" class="table table-bordered" >
 		<thead>	
-			<tr>
+		      	<tr>
+                <th>#</th>
                 <th> Subject Name </th>			    		
                 <th> Teacher Name  </th>
                 <?php if($this->session->role=='admin'){
@@ -20,10 +21,11 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach($subjectData->result() as $value){
+            <?php $i=1; foreach($subjectData->result() as $value){
                 $teacher = getTeacherData($value->teacher_id);
                 ?>
             <tr>
+                <td><?php echo $i++;  ?></td>
                 <td><?php echo $value->name; ?></td>
                 <td><?php echo $teacher['fname'].' '.$teacher['lname']; ?></td>
                 <td><div class="btn-group">
@@ -40,3 +42,8 @@
             <?php } ?>
         </tbody>
     </table>
+    <script>
+	$(document).ready( function () {
+    $('#subjectDetails').DataTable();
+});
+</script>

@@ -38,22 +38,25 @@ class Marksheet extends MY_Controller
 				Class Name : '.$classData['class_name'].'
 			</div>
 
-			<div id="messages"></div>
-
-			<div class="pull pull-right">
+			<div id="messages"></div>';
+			if($this->session->role!='student'){
+			$table .='<div class="pull pull-right">
 	  			<button class="btn btn-default" data-toggle="modal" data-target="#addMarksheetModal" onclick="addMarksheet('.$classId.')">Add Marksheet</button>	
-		  	</div>
+		  	</div>';
+			}
 		  		
-		  	<br /> <br />
+		  	$table.='<br /> <br />
 
 		  	<!-- Table -->
 		  	<table class="table table-bordered" id="manageMarksheetTable">
 			    <thead>	
 			    	<tr>			    		
 			    		<th> Marksheet Name  </th>
-			    		<th> Date </th>
-			    		<th> Action </th>
-			    	</tr>
+			    		<th> Date </th>';
+						if($this->session->role!='student'){
+			    		$table.='<th> Action </th>';
+						}
+			    	$table.='</tr>
 			    </thead>
 			    <tbody>';
 			    	if($marksheetData) {
@@ -71,9 +74,11 @@ class Marksheet extends MY_Controller
 
 				    		$table .= '<tr>
 				    			<td>'.$value['marksheet_name'].'</td>
-				    			<td>'.$value['marksheet_date'].'</td>
-				    			<td>'.$button.'</td>
-				    		</tr>
+				    			<td>'.$value['marksheet_date'].'</td>';
+								if($this->session->role!='student'){
+				    			$table.='<td>'.$button.'</td>';
+								}
+				    		$table.='</tr>
 				    		';
 				    	} // /foreach				    	
 			    	} 
@@ -280,6 +285,52 @@ class Marksheet extends MY_Controller
 			if($marksheetData) {
 				foreach ($marksheetData as $key => $value) {
 					$option .= '<option value="'.$value['marksheet_id'].'">'.$value['marksheet_name'].'</option>';
+				} // /foreach
+			}
+			else {
+				$option = '<option value="">No Data</option>';
+			} // /else empty section
+
+			echo $option;
+		}
+	}
+
+	public function fetchSubjectDataByClass($classId = null)
+	{
+		if($classId) {
+			$subjectData = $this->model_subject->fetchSubjectDataByClass($classId);
+			if($subjectData) {
+				foreach ($subjectData->result() as $value) {
+					$option .= '<option value="'.$value->subject_id.'">'.$value->name.'</option>';
+				} // /foreach
+			}
+			else {
+				$option = '<option value="">No Data</option>';
+			} // /else empty section
+
+			echo $option;
+		}
+	}
+
+	public function addStudentMarks(){
+		$data = $this->input->post();
+		$query = $this->model_marksheet->addStudentMarks_data($data);
+		if($query){
+			$this->session->set_flashdata('success','<div class="alert alert-success" role="alert">SuccessFully Inseted</div>');
+			redirect(base_url('marksheet?opt=addmk'));
+		}
+		else{
+			$this->session->set_flashdata('failed','<div class="alert alert-danger" role="alert">Somthing went Wrong</div>');
+		}
+	}
+
+	public function fetchStudentDataByClass($classId = null)
+	{
+		if($classId) {
+			$studentData = $this->model_student->fetchStudentDataByClass($classId);
+			if($studentData) {
+				foreach ($studentData as $key => $value) {
+					$option .= '<option value="'.$value['student_id'].'">'.$value['fname'].' '.$value['lname'].'</option>';
 				} // /foreach
 			}
 			else {

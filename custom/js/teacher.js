@@ -4,10 +4,10 @@ var base_url = $("#base_url").val();
 $(document).ready(function() {
 	$("#topNavTeacher").addClass('active');
 
-	manageTeacherTable = $("#manageTeacherTable").DataTable({
-		'ajax' : base_url + 'teacher/fetchTeacherData',
-		'order' : []
-	});
+	// manageTeacherTable = $("#manageTeacherTable").DataTable({
+	// 	'ajax' : base_url + 'teacher/fetchTeacherData',
+	// 	'order' : []
+	// });
 
 	/*
 	*-------------------------------------------------
@@ -60,8 +60,7 @@ $(document).ready(function() {
 				contentType: false,
 				processData: false,
 				async: false,
-				success:function(response) {					
-
+				success:function(response) {	
 					if(response.success == true) {						
 						$("#add-teacher-messages").html('<div class="alert alert-success alert-dismissible" role="alert">'+
 						  '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+

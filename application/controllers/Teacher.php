@@ -94,18 +94,23 @@ class Teacher extends MY_Controller
 	*/
 	public function uploadImage() 
 	{
-		$type = explode('.', $_FILES['photo']['name']);				
-		$type = $type[count($type)-1];		
-		$url = 'assets/images/teachers/'.uniqid(rand()).'.'.$type;
-		if(in_array($type, array('gif', 'jpg', 'jpeg', 'png', 'JPG', 'GIF', 'JPEG', 'PNG'))) {
-			if(is_uploaded_file($_FILES['photo']['tmp_name'])) {			
-				if(move_uploaded_file($_FILES['photo']['tmp_name'], $url)) {
-					return $url;
-				}	else {
-					return false;
-				}			
-			}
-		} 
+		$config['upload_path'] = './assets/images/';
+		$config['allowed_types'] = 'jpg|png|jpeg';
+		$config['max_size']     =2024;
+		$config['max_width']            = 1024;
+		$config['max_height']           = 768;
+
+		$this->load->library('upload', $config);
+		$this->upload->initialize($config);
+		$this->upload->overwrite = true;
+		if ($this->upload->do_upload('photo')){
+			$data = $this->upload->data();
+			$url = 'assets/images/'.$data['file_name'];
+			return $url;
+		}
+		else{
+			return false;
+		}
 	}
 
 	/*
@@ -116,37 +121,9 @@ class Teacher extends MY_Controller
 	public function fetchTeacherData($teacherId = null)
 	{
 		if($teacherId) {
-			$result = $this->model_teacher->fetchTeacherData($teacherId);			
-		}
-		else {
-			$teacherData = $this->model_teacher->fetchTeacherData();
-			$result = array('data' => array());
-			foreach ($teacherData as $key => $value) {
-				$button = '<!-- Single button -->
-					<div class="btn-group">
-					  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					    Action <span class="caret"></span>
-					  </button>
-					  <ul class="dropdown-menu">
-					    <li><a type="button" data-toggle="modal" data-target="#updateTeacherModal" onclick="editTeacher('.$value['teacher_id'].')"> <i class="glyphicon glyphicon-edit"></i> Edit</a></li>
-					    <li><a type="button" data-toggle="modal" data-target="#removeTeacherModal" onclick="removeTeacher('.$value['teacher_id'].')"> <i class="glyphicon glyphicon-trash"></i> Remove</a></li>		    
-					  </ul>
-					</div>';
-
-				$photo = '	<img src="'.base_url().$value['image'].'" alt="Photo" class="img-circle candidate-photo"/>';
-
-				$result['data'][$key] = array(
-					$photo,
-					$value['fname'] . ' ' . $value['lname'],			
-					$value['name'],	
-					$value['age'],
-					$value['contact'],					
-					$value['email'],			
-					$value['city'],		
-					$button
-				);			
-			} // /foreach
-		}			
+			$result = $this->model_teacher->fetchTeacherData($teacherId);	
+			
+		}		
 
 		echo json_encode($result);
 	}
@@ -259,18 +236,23 @@ class Teacher extends MY_Controller
 	*/
 	public function editUploadImage() 
 	{
-		$type = explode('.', $_FILES['editPhoto']['name']);				
-		$type = $type[count($type)-1];		
-		$url = 'assets/images/teachers/'.uniqid(rand()).'.'.$type;
-		if(in_array($type, array('gif', 'jpg', 'jpeg', 'png', 'JPG', 'GIF', 'JPEG', 'PNG'))) {
-			if(is_uploaded_file($_FILES['editPhoto']['tmp_name'])) {			
-				if(move_uploaded_file($_FILES['editPhoto']['tmp_name'], $url)) {
-					return $url;
-				}	else {
-					return false;
-				}			
-			}
-		} 
+		$config['upload_path'] = './assets/images/';
+		$config['allowed_types'] = 'jpg|png|jpeg';
+		$config['max_size']     =2024;
+		$config['max_width']            = 1024;
+		$config['max_height']           = 768;
+
+		$this->load->library('upload', $config);
+		$this->upload->initialize($config);
+		$this->upload->overwrite = true;
+		if ($this->upload->do_upload('editPhoto')){
+			$data = $this->upload->data();
+			$url = 'assets/images/'.$data['file_name'];
+			return $url;
+		}
+		else{
+			return false;
+		}
 	}
 
 

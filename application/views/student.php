@@ -326,7 +326,7 @@ else if($this->input->get('opt') == 'mgst') { ?>
 
             <div class="col-md-6">
               <center>
-                <img src="" id="student_photo" alt="Student Photo" class="img-thumbnail upload-photo" />
+                <img src="" id="student_photo" alt="Student Photo" class="img-thumbnail" />
               </center>               
             </div>
 

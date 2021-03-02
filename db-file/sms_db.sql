@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 28, 2021 at 09:11 AM
+-- Generation Time: Mar 02, 2021 at 07:24 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.0
 
@@ -38,6 +38,17 @@ CREATE TABLE `attendance` (
   `mark` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `attendance`
+--
+
+INSERT INTO `attendance` (`attendance_id`, `attendance_type`, `student_id`, `teacher_id`, `class_id`, `section_id`, `attendance_date`, `mark`) VALUES
+(15, 1, 37, 0, 1, 18, '2021-03-02', 1),
+(16, 1, 38, 0, 1, 18, '2021-03-02', 1),
+(17, 1, 37, 0, 1, 18, '2021-03-03', 2),
+(18, 1, 38, 0, 1, 18, '2021-03-03', 3),
+(21, 2, 0, 12, 0, 0, '2021-03-02', 2);
+
 -- --------------------------------------------------------
 
 --
@@ -59,8 +70,7 @@ INSERT INTO `class` (`class_id`, `class_name`, `numeric_name`) VALUES
 (4, 'Four', '04'),
 (5, 'Five', '5'),
 (6, 'Two', '02'),
-(7, 'Nine', '09'),
-(9, 'Seven', '07');
+(7, 'Nine', '09');
 
 -- --------------------------------------------------------
 
@@ -122,12 +132,7 @@ CREATE TABLE `marksheet` (
 --
 
 INSERT INTO `marksheet` (`marksheet_id`, `marksheet_name`, `marksheet_date`, `class_id`) VALUES
-(1, '3sdafsad', '2021-02-10', 3),
-(2, 'Taka', '2021-02-27', 3),
-(3, 'fsdf', '2021-02-10', 1),
-(4, 'fsdf', '2021-02-10', 1),
-(5, 'fsdfsdfs', '2021-02-10', 1),
-(6, 'fsdfsdfs', '2021-02-10', 1);
+(21, 'Final Exam', '2021-03-02', 1);
 
 -- --------------------------------------------------------
 
@@ -144,6 +149,18 @@ CREATE TABLE `marksheet_student` (
   `class_id` int(11) NOT NULL,
   `section_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `marksheet_student`
+--
+
+INSERT INTO `marksheet_student` (`marksheet_student_id`, `student_id`, `subject_id`, `obtain_mark`, `marksheet_id`, `class_id`, `section_id`) VALUES
+(5, 37, 9, '50', 21, 1, 18),
+(6, 37, 11, '50', 21, 1, 18),
+(7, 37, 12, '50', 21, 1, 18),
+(8, 38, 9, '50', 21, 1, 18),
+(9, 38, 11, '60', 21, 1, 18),
+(10, 38, 12, '50', 21, 1, 18);
 
 -- --------------------------------------------------------
 
@@ -195,8 +212,9 @@ CREATE TABLE `payment` (
 --
 
 INSERT INTO `payment` (`payment_id`, `paid_amount`, `status`, `payment_type`, `payment_date`, `class_id`, `section_id`, `student_id`, `payment_name_id`) VALUES
-(1, '20202', 1, 1, '2021-02-10', 5, 16, 33, 1),
-(2, '', 0, 0, '0000-00-00', 1, 18, 34, 2);
+(5, '600', 1, 1, '2021-03-02', 1, 18, 37, 5),
+(8, '', 0, 0, '0000-00-00', 1, 18, 37, 7),
+(9, '', 0, 0, '0000-00-00', 1, 18, 38, 7);
 
 -- --------------------------------------------------------
 
@@ -218,8 +236,8 @@ CREATE TABLE `payment_name` (
 --
 
 INSERT INTO `payment_name` (`id`, `name`, `start_date`, `end_date`, `total_amount`, `type`) VALUES
-(1, 'sdfsdaf', '2021-02-17', '2021-02-18', '5000', 1),
-(2, 'sdfsdaf', '2021-02-25', '2021-02-28', '5000', 1);
+(5, 'January', '2021-02-17', '2021-02-18', '600', 1),
+(7, 'January', '2021-02-17', '2021-02-17', '600', 2);
 
 -- --------------------------------------------------------
 
@@ -271,7 +289,10 @@ CREATE TABLE `student` (
 --
 
 INSERT INTO `student` (`student_id`, `register_date`, `class_id`, `section_id`, `fname`, `lname`, `password`, `image`, `age`, `dob`, `contact`, `email`, `address`, `city`, `country`) VALUES
-(34, '2021-02-17', 1, 18, 'Dhaka', 'sdfsdf', '12345', 'assets/images/default/default_avatar.png', '234', '2021-02-25', '234234234234', 'samsu32@gmail.com', 'Subid bazar', 'Sylhet', 'Bangladesh');
+(34, '2021-02-17', 5, 19, 'Dhaka', 'sdfsdf', '12345', 'assets/images/default/default_avatar.png', '234', '2021-02-25', '234234234234', 'samsu32@gmail.com', 'Subid bazar', 'Sylhet', 'Bangladesh'),
+(35, '2021-03-18', 5, 19, 'Kablu', 'mama', '123456', 'assets/images/default/default_avatar.png', '12', '2021-03-19', '01768960881', 'samsu32@gmail.com', 'Subid bazar', 'Sylhet', 'Bangladesh'),
+(37, '2021-03-18', 1, 18, 'Demra', 'Pua', '12345', 'assets/images/default/default_avatar.png', '12', '2021-03-19', '23424234', 'samsu32@gmail.com', 'Subid bazar', 'Sylhet', 'Bangladesh'),
+(38, '2021-03-17', 1, 18, 'Dhaka', 'pok', '54645645', 'assets/images/t5-removebg-preview.png', '12', '2021-03-11', '546445645645', 'samsu32@gmail.com', 'Subid bazar', 'Sylhet', 'Bangladesh');
 
 -- --------------------------------------------------------
 
@@ -293,7 +314,9 @@ CREATE TABLE `subject` (
 
 INSERT INTO `subject` (`subject_id`, `name`, `total_mark`, `class_id`, `teacher_id`) VALUES
 (9, 'Bangla', '100', 1, 12),
-(10, 'English', '100', 6, 12);
+(10, 'English', '100', 6, 12),
+(11, 'English', '100', 1, 12),
+(12, 'Math', '100', 1, 12);
 
 -- --------------------------------------------------------
 
@@ -323,7 +346,7 @@ CREATE TABLE `teacher` (
 --
 
 INSERT INTO `teacher` (`teacher_id`, `register_date`, `fname`, `lname`, `password`, `image`, `date_of_birth`, `age`, `contact`, `email`, `address`, `city`, `country`, `job_type`) VALUES
-(12, '2021-02-18', 'Dhaka', 'Irfan', '50000', 'assets/images/default/default_avatar.png', '2021-02-18', '20', '44564', 'samsu32@gmail.com', 'Subid bazar', 'Sylhet', 'Bangladesh', 1);
+(12, '2021-02-18', 'Dhaka', 'Irfan', '50000', 'assets/images/adidas.png', '2021-02-18', '20', '44564', 'samsu32@gmail.com', 'Subid bazar', 'Sylhet', 'Bangladesh', 2);
 
 -- --------------------------------------------------------
 
@@ -443,7 +466,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `attendance`
 --
 ALTER TABLE `attendance`
-  MODIFY `attendance_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `attendance_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `class`
@@ -467,13 +490,13 @@ ALTER TABLE `expenses_name`
 -- AUTO_INCREMENT for table `marksheet`
 --
 ALTER TABLE `marksheet`
-  MODIFY `marksheet_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `marksheet_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `marksheet_student`
 --
 ALTER TABLE `marksheet_student`
-  MODIFY `marksheet_student_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `marksheet_student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `notice`
@@ -485,37 +508,37 @@ ALTER TABLE `notice`
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `payment_name`
 --
 ALTER TABLE `payment_name`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `section`
 --
 ALTER TABLE `section`
-  MODIFY `section_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `section_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `student`
 --
 ALTER TABLE `student`
-  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `student_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `subject`
 --
 ALTER TABLE `subject`
-  MODIFY `subject_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `subject_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `teacher`
 --
 ALTER TABLE `teacher`
-  MODIFY `teacher_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `teacher_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `users`

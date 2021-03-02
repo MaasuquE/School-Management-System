@@ -56,7 +56,7 @@ class Model_Marksheet extends CI_Model
 	public function create($classId = null)
 	{
 		if($classId) {
-			$sectionData = $this->model_section->fetchSectionDataByClass($classId);
+			$sectionData = $this->model_section->fetchSectionDataByClass($classId);;
 
 			$marksheet_data = array(
 				'marksheet_name' => $this->input->post('marksheetName'),
@@ -68,19 +68,20 @@ class Model_Marksheet extends CI_Model
 
 			$marksheet_id = $this->db->insert_id();
 
-			foreach ($sectionData as $key => $value) {
+			foreach ($sectionData->result() as $value) {
 
-				$studentData = $this->model_student->fetchStudentByClassAndSection($classId, $value['section_id']);
+				$studentData = $this->model_student->fetchStudentByClassAndSection($classId, $value->section_id);
 				$subjectData = $this->model_subject->fetchSubjectDataByClass($classId);
 
 				foreach ($studentData as $student_key => $student_value) {					
-					foreach ($subjectData as $subject_key => $subject_value) {
+					foreach ($subjectData->result() as $subject_value) {
 						$marksheet_student_data = array(
 							'student_id' => $student_value['student_id'],
-							'subject_id' => $subject_value['subject_id'],							
+							'subject_id' => $subject_value->subject_id,							
 							'marksheet_id' => $marksheet_id,
 							'class_id' => $classId,
-							'section_id' => $value['section_id']
+							'obtain_mark' => 50,
+							'section_id' => $value->section_id
 						);
 
 						$this->db->insert('marksheet_student', $marksheet_student_data);				
@@ -95,6 +96,18 @@ class Model_Marksheet extends CI_Model
 			return false;
 		}
 	} // /.create marksheet function
+
+	public function addStudentMarks_data($data){
+		$this->db->where('student_id',$data['student_id'])
+				 ->where('marksheet_id',$data['marksheet_id'])
+				 ->where('subject_id',$data['subject_id']);
+		if($this->db->update('marksheet_student',$data)){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
 
 	/*
 	*-----------------------------------------------------------

@@ -26,12 +26,14 @@ if(isset($this->session->role)){
 		<?php } ?>
     	<br /> <br /> <br />    	
     	
-    	<table id="manageTeacherTable" class="table table-bordered">
+    	<table id="teacherTable" class="table table-bordered">
     		<thead>
     			<tr>
     				<th>#</th>
+    				<th>Image</th>
+    				<th>Teacher Id</th>
     				<th>Name</th>
-    				<th>Subject</th>
+    				<!-- <th>Subject</th> -->
     				<th>Age</th>
     				<th>Contact</th>    				
     				<th>Email</th>
@@ -41,12 +43,41 @@ if(isset($this->session->role)){
 					<?php } ?>
     			</tr>
     		</thead>
+			<tbody>
+				<?php $i=1; foreach($teacherData as $key=>$value ){ ?>
+				<tr>
+					<td><?php echo $i++; ?></td>
+					<td><img src="<?php echo $value['image']; ?>" class="img-circle candidate-photo" alt="Student Image"></td>
+					<td><?php echo $value['teacher_id']; ?></td>
+					<td><?php echo $value['fname'].' '.$value['lname']; ?></td>
+					<td><?php echo $value['age']; ?></td>
+					<td><?php echo $value['contact']; ?></td>
+					<td><?php echo $value['email']; ?></td>
+					<td><?php echo $value['city']; ?></td>
+					<?php if($user_role=='admin'){ ?>
+					<td><div class="btn-group">
+						<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Action <span class="caret"></span>
+						</button>
+							<ul class="dropdown-menu">
+								<li><a type="button" data-toggle="modal" data-target="#updateTeacherModal" onclick="editTeacher('<?php echo $value['teacher_id']; ?>')"> <i class="glyphicon glyphicon-edit"></i> Edit</a></li>
+								<li><a type="button" data-toggle="modal" data-target="#removeTeacherModal" onclick="removeTeacher('<?php echo $value['teacher_id']; ?>')"> <i class="glyphicon glyphicon-trash"></i> Remove</a></li>		    
+							</ul>
+						</div></td>
+						<?php } ?>
+				</tr>
+				<?php } ?>
+			</tbody>
     	</table>	
 
     </fieldset>	
   </div>
 </div>
-
+<script>
+	$(document).ready( function () {
+    $('#teacherTable').DataTable();
+});
+</script>
 <!-- add teacher -->
 <div class="modal fade" tabindex="-1" role="dialog" id="addTeacher">
   <div class="modal-dialog modal-lg" role="document">
@@ -206,7 +237,7 @@ if(isset($this->session->role)){
 
 						<div class="col-md-6">
 							<center>
-								<img src="" id="teacher_photo" alt="Teacher Photo" class="img-thumbnail upload-photo" />
+								<img src="" id="teacher_photo" alt="Teacher Photo" />
 							</center>								
 						</div>
 						<div class="col-md-6">

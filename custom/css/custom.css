@@ -212,4 +212,6 @@
 .notice_details b{
     margin-bottom: 10px;
 }
-
+.mark_input{
+    margin-left: 10px !important;
+}

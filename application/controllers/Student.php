@@ -106,18 +106,23 @@ class Student extends MY_Controller
 	*/
 	public function uploadImage() 
 	{
-		$type = explode('.', $_FILES['photo']['name']);				
-		$type = $type[count($type)-1];		
-		$url = 'assets/images/students/'.uniqid(rand()).'.'.$type;
-		if(in_array($type, array('gif', 'jpg', 'jpeg', 'png', 'JPG', 'GIF', 'JPEG', 'PNG'))) {
-			if(is_uploaded_file($_FILES['photo']['tmp_name'])) {			
-				if(move_uploaded_file($_FILES['photo']['tmp_name'], $url)) {
-					return $url;
-				}	else {
-					return false;
-				}			
-			}
-		} 
+		$config['upload_path'] = './assets/images/';
+		$config['allowed_types'] = 'jpg|png|jpeg';
+		$config['max_size']     =2024;
+		$config['max_width']            = 1024;
+		$config['max_height']           = 768;
+
+		$this->load->library('upload', $config);
+		$this->upload->initialize($config);
+		$this->upload->overwrite = true;
+		if ($this->upload->do_upload('photo')){
+			$data = $this->upload->data();
+			$url = 'assets/images/'.$data['file_name'];
+			return $url;
+		}
+		else{
+			return false;
+		}
 	}
 
 	/*
@@ -241,37 +246,11 @@ class Student extends MY_Controller
 	public function fetchStudentByClass($classId = null) {
 		if($classId) {
 			$data['studentData'] = $this->model_student->fetchStudentDataByClassAll($classId);
-			print_r($data);
-			exit;
+			// print_r($data);
+			// exit;
 			// $data$['classData'] = $this->model_classes->fetchClassData($value['class_id']);
 			// $data['sectionData'] = $this->model_section->fetchSectionByClassSection($value['class_id'], $value['section_id']);
-			//$img = '<img src="'.base_url() . $value['image'].'" class="img-circle candidate-photo" alt="Student Image" />';
 			$this->load->view('student_manage',$data);
-			
-			// foreach ($studentData as $key => $value) {
-				
-
-				
-			// 	if($this->session->role =='admin'){
-			// 	$button = '<div class="btn-group">
-			// 	  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			// 	    Action <span class="caret"></span>
-			// 	  </button>
-			// 	  <ul class="dropdown-menu">			  	
-			// 	    <li><a href="#" data-toggle="modal" data-target="#editStudentModal" onclick="updateStudent('.$value['student_id'].')">Edit</a></li>
-			// 	    <li><a href="#" data-toggle="modal" data-target="#removeStudentModal" onclick="removeStudent('.$value['student_id'].')">Remove</a></li>			    
-			// 	  </ul>
-			// 	</div>';
-			// 	}
-			// 	$result['data'][$key] = array(
-			// 		$img,
-			// 		$value['fname'] . ' ' . $value['lname'],
-			// 		$classData['class_name'],
-			// 		$sectionData['section_name'],
-			// 		$button
-			// 	);
-			// } // /foreach	
-			// echo json_encode($result);
 		}
 	}
 
@@ -429,18 +408,23 @@ class Student extends MY_Controller
 	*/
 	public function editUploadImage() 
 	{
-		$type = explode('.', $_FILES['editPhoto']['name']);				
-		$type = $type[count($type)-1];		
-		$url = 'assets/images/students/'.uniqid(rand()).'.'.$type;
-		if(in_array($type, array('gif', 'jpg', 'jpeg', 'png', 'JPG', 'GIF', 'JPEG', 'PNG'))) {
-			if(is_uploaded_file($_FILES['editPhoto']['tmp_name'])) {			
-				if(move_uploaded_file($_FILES['editPhoto']['tmp_name'], $url)) {
-					return $url;
-				}	else {
-					return false;
-				}			
-			}
-		} 
+		$config['upload_path'] = './assets/images/';
+		$config['allowed_types'] = 'jpg|png|jpeg';
+		$config['max_size']     =2024;
+		$config['max_width']            = 1024;
+		$config['max_height']           = 768;
+
+		$this->load->library('upload', $config);
+		$this->upload->initialize($config);
+		$this->upload->overwrite = true;
+		if ($this->upload->do_upload('editPhoto')){
+			$data = $this->upload->data();
+			$url = 'assets/images/'.$data['file_name'];
+			return $url;
+		}
+		else{
+			return false;
+		}
 	}
 
 	/*
