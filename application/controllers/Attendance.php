@@ -264,7 +264,7 @@ class Attendance extends MY_Controller
 				    			</td>';
 								if($attedanceData!=false){
 
-								$div .='<td> <input type="hidden" name="exist_techer" value="yes" />
+								$div .='<td> <input type="hidden" name="exist_teacher" value="yes" />
 				    				<select name="attendance_status['.$x.']" id="attendance_status" class="form-control">
 				    					<option value="" '; 
 										if(isset($attedanceData['mark']) && $attedanceData['mark'] == 0) {

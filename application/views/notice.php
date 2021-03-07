@@ -45,8 +45,10 @@ if(isset($this->session->role)){
 					</div>
 				</div>
 				<a href="<?php echo base_url('notice_details/'.$row->id); ?>"><div class="details_btn">Show Details</div></a>
+				<?php if($user_role!='student'){ ?>
 				<div class="edit_notice notice_btn"><a href=""><i class="glyphicon glyphicon-edit"></i></a></div>
 				<div class="dlt_notice notice_btn"><a href="<?php echo base_url('delete_notice/'.$row->id); ?>"><i class="glyphicon glyphicon-trash"></i></a></div>
+				<?php } ?>
 			</div>
 			<?php  }} ?>
 		</div>

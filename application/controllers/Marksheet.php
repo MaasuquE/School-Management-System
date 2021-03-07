@@ -393,8 +393,8 @@ class Marksheet extends MY_Controller
 					  	<ul class="nav nav-tabs" role="tablist">
 					    	<li role="presentation" class="active"><a href="#classStudent" aria-controls="classStudent" role="tab" data-toggle="tab">All Student</a></li>';					   
 					    	$x = 1;
-			            	foreach ($sectionData as $key => $value) {            	
-								$validator['html'] .= '<li role="presentation"><a href="#countSection'.$x.'" aria-controls="countSection" role="tab" data-toggle="tab"> Section ('.$value['section_name'].')</a></li>';
+			            	foreach ($sectionData->result() as $value) {            	
+								$validator['html'] .= '<li role="presentation"><a href="#countSection'.$x.'" aria-controls="countSection" role="tab" data-toggle="tab"> Section ('.$value->section_name.')</a></li>';
 								$x++;
 							} // /foreach    					    	
 
@@ -480,9 +480,11 @@ class Marksheet extends MY_Controller
 				  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 				    Action <span class="caret"></span>
 				  </button>
-				  <ul class="dropdown-menu">			  	
-				    <li><a href="#" data-toggle="modal" data-target="#editMarksModal" onclick="editMarks('.$value['student_id'].','.$classId.')">Edit Marks</a></li>
-				    <li><a href="#" data-toggle="modal" data-target="#viewMarksModal" onclick="viewMarks('.$value['student_id'].','.$classId.')">View</a></li>			    
+				  <ul class="dropdown-menu">';
+				  if($this->session->role !='student'){			  	
+					$button.='<li><a href="#" data-toggle="modal" data-target="#editMarksModal" onclick="editMarks('.$value['student_id'].','.$classId.')">Edit Marks</a></li>';
+				  }
+				  $button.='<li><a href="#" data-toggle="modal" data-target="#viewMarksModal" onclick="viewMarks('.$value['student_id'].','.$classId.')">View</a></li>			    
 				  </ul>
 				</div>';
 
@@ -644,7 +646,8 @@ class Marksheet extends MY_Controller
 
 				$totalMark = 0;
 				$obtainMark = 0;
-
+				$i=0;
+				$mark =0;
 				foreach ($studentMarkData as $key => $value) {						  		
 					$subjectData = $this->model_subject->fetchSubjectByClassSection($value['class_id'], $value['subject_id']);
 					$div .= '<tr>					
@@ -655,10 +658,32 @@ class Marksheet extends MY_Controller
 
 				$totalMark += $subjectData['total_mark'];
 				$obtainMark += $value['obtain_mark'];
+				$i++;
+				if($value['obtain_mark']>=80 && $value['obtain_mark']<=100){
+					$mark +=5;
+				}
+				elseif($value['obtain_mark']>=70 && $value['obtain_mark']<=79.99){
+					$mark +=rand(4.00,4.99);
+				}
+				elseif($value['obtain_mark']>=60 && $value['obtain_mark']<=69.99){
+					$mark +=rand(4.00,4.99);
+				}
+				elseif($value['obtain_mark']>=50 && $value['obtain_mark']<=59.99){
+					$mark +=rand(3.50,3.99);
+				}
+				elseif($value['obtain_mark']>=40 && $value['obtain_mark']<=49.99){
+					$mark +=rand(3.00,3.49);
+				}
+				elseif($value['obtain_mark']>=30 && $value['obtain_mark']<=39.99){
+					$mark +=rand(2.00,2.99);
+				}
+				if($value['obtain_mark']>=20 && $value['obtain_mark']<=29.99){
+					$mark +=rand(1.00,1.99);
+				}
 
-				$percentage = ($obtainMark / $totalMark) * 100;
-
-			  	}		  		
+			}	
+			$result =$mark/$i;
+			
 
 			$div .= '</table>
 			<table class="table table-bordered">
@@ -671,8 +696,8 @@ class Marksheet extends MY_Controller
 					<td>'.$obtainMark.'</td>
 				</tr>
 				<tr>
-					<th>Percentage</th>
-					<td>'.$percentage.' % </td>
+					<th>GPA Point</th>
+					<td>'.number_format((float)$result, 2, '.', '').'</td>
 				</tr>
 			</table>
 			';

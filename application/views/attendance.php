@@ -65,7 +65,9 @@ if($this->input->get('atd') == '' || !$this->input->get('atd')) {
 		      <select class="form-control" name="type" id="type">
 		      	<option value="">Select</option>
 		      	<option value="1">Student</option>
+				<?php if($this->session->role != 'student'){ ?>
 		      	<option value="2">Teacher</option>
+				<?php } ?>
 		      </select>
 		    </div>
 		  </div>

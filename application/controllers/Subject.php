@@ -36,66 +36,7 @@ class Subject extends MY_Controller
 			
 			$this->load->view('subject_details',$data);
 			
-			// $table = '
-
-			// <div class="well">
-			// 	Class Name : '.$classData['class_name'].'
-			// </div>
-			// <div id="messages"></div>';
-			// if($this->session->role=='admin'){
-			// $table .= '<div class="pull pull-right">
-	  		// 	<button class="btn btn-default" data-toggle="modal" data-target="#addSubjectModal" onclick="addSubject('.$classId.')">Add Subject</button>	
-		  	// </div>';
-			// }
-		  		
-			// $table .= '<br /> <br />
-
-		  	// <!-- Table -->
-		  	// <table class="table table-bordered" id="manageSubjectTable">
-			//     <thead>	
-			//     	<tr>
-			//     		<th> Subject Name </th>			    		
-			//     		<th> Teacher Name  </th>';
-			// 			if($this->session->role=='admin'){
-			// 				$table .= '<th> Action </th>';
-			// 			}
-			// 			$table .= '</tr>
-			//     </thead>
-			//     <tbody>';
-			// 			if($subjectData->num_rows() >0){
-			//     		foreach ($subjectData->result() as $value) {
-
-			//     			$teacherData = $this->model_teacher->fetchTeacherData($value->teacher_id);
-
-			//     			$button = '<div class="btn-group">
-			// 				  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			// 				    Action <span class="caret"></span>
-			// 				  </button>
-			// 				  <ul class="dropdown-menu">
-			// 				    <li><a type="button" data-toggle="modal" data-target="#editSubjectModal" onclick="editSubject('.$value['subject_id'].','.$value['class_id'].')"> <i class="glyphicon glyphicon-edit"></i> Edit</a></li>
-							    
-			// 				    <li><a type="button" data-toggle="modal" data-target="#removeSubjectModal" onclick="removeSubject('.$value['subject_id'].','.$value['class_id'].')"> <i class="glyphicon glyphicon-trash"></i> Remove</a></li>		    
-			// 				  </ul>
-			// 				</div>';
-
-			// 	    		$table .= '<tr>
-			// 	    			<td>'.$value->name.'</td>				    			
-			// 	    			<td>'.$teacherData->fname.' '.$teacherData->lname.'</td>';
-			// 					if($this->session->role == 'admin'){
-			// 						$table .= '<td>'.$button.'</td>';
-			// 					}
-			// 					$table .= '</tr>';
-			// 	    	} // /foreach				    	
-			//     	} 
-			//     	else {
-			//     		$table .= '<tr>
-			//     			<td colspan="3"><center>No Data Available</center></td>
-			//     		</tr>';
-			//     	} // /else
-			//     $table .= '</tbody>
-			// </table>
-			// ';
-			// echo $table;
+			
 		}
 	}
 

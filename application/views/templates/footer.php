@@ -18,6 +18,7 @@
   <script type="text/javascript" src="<?php echo base_url('assets/keith-calendar/jquery.plugin.js') ?>"></script> 
   <script type="text/javascript" src="<?php echo base_url('assets/keith-calendar/jquery.calendars.picker.js') ?>"></script>
   <script type="text/javascript" src="<?php echo base_url('assets/keith-calendar/jquery.calendars.picker.js') ?>"></script>
+  <script type="text/javascript" src="<?php echo base_url('assets/owl-carousel/owl.carousel.min.js') ?>"></script>
 
   
 

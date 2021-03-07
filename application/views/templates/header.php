@@ -23,6 +23,8 @@ if(isset($this->session->role)){
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/fullcalendar/fullcalendar.min.css') ?>">  
   <!-- keith calendar css -->
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/keith-calendar/jquery.calendars.picker.css') ?>"> 
+  <link rel="stylesheet" href="<?php echo base_url('assets/owl-carousel/owl.carousel.min.css'); ?>">
+  <link rel="stylesheet" href="<?php echo base_url('assets/owl-carousel/owl.carousel.min.css'); ?>">
 
   <!-- custom css -->
   <link rel="stylesheet" type="text/css" href="<?php echo base_url('custom/css/custom.css') ?>"> 
@@ -45,7 +47,7 @@ if(isset($this->session->role)){
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="<?php echo base_url('dashboard') ?>">RuaSMS</a>
+      <a class="navbar-brand" href="<?php echo base_url('dashboard') ?>"><img src="<?php echo base_url('assets/images/sms.png'); ?>" alt=""></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -78,7 +80,9 @@ if(isset($this->session->role)){
         <li class="dropdown" id="topAttendanceMainNav">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> <i class="glyphicon glyphicon-time"></i> Attendance <span class="caret"></span></a>
           <ul class="dropdown-menu">
+            <?php if($user_role!='student'){ ?>
             <li id="takeAttendNav"><a href="<?php echo base_url('attendance?atd=add') ?>">Take Attendance</a></li>
+            <?php } ?>
             <li id="attenReport"><a href="<?php echo base_url('attendance?atd=report') ?>">Attendance Report</a></li>
           </ul>
         </li>
@@ -87,7 +91,9 @@ if(isset($this->session->role)){
           <ul class="dropdown-menu">
             <li id="manageMarksheet"><a href="<?php echo base_url('marksheet?opt=mngms') ?>">Manage Marksheet</a></li>
             <li id="manageMarks"><a href="<?php echo base_url('marksheet?opt=mgmk') ?>">Manage Marks</a></li>
+            <?php if($user_role!='student'){ ?>
             <li id="manageMarks"><a href="<?php echo base_url('marksheet?opt=addmk') ?>">Add Marks</a></li>
+            <?php } ?>
           </ul>
         </li>
         <?php if($user_role=='admin') {?>

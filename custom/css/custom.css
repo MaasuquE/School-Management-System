@@ -7,7 +7,9 @@
 	text-align: center;
 	font-size: 30px;
 }
-
+.login-form{
+    margin-top: 24%;
+}
 .login-button {
 	padding: 6px;
     font-size: 20px;
@@ -214,4 +216,15 @@
 }
 .mark_input{
     margin-left: 10px !important;
+}
+.login_logo img{
+    left: 24%;
+    position: absolute;
+    top: -26%;
+    height: 365px;
+}
+
+.navbar-brand img{
+    height: 85px;
+    margin-top: -35px;
 }
