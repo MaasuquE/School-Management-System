@@ -22,6 +22,7 @@ class Users extends MY_Controller
 
 	}
 
+
 	public function login($user)
 	{
 		$data['auth_type']=$user;
@@ -62,7 +63,7 @@ class Users extends MY_Controller
 
 					$validator['success'] = true;
 					$validator['messages'] = "index.php/dashboard";		
-					redirect('dashboard');		
+					redirect('home');		
 				}	
 				else {
 					$validator['success'] = false;
@@ -102,7 +103,7 @@ class Users extends MY_Controller
 
 					$validator['success'] = true;
 					$validator['messages'] = "index.php/dashboard";		
-					redirect('dashboard');		
+					redirect('home');		
 				}	
 				else {
 					$validator['success'] = false;
@@ -142,7 +143,7 @@ class Users extends MY_Controller
 
 					$validator['success'] = true;
 					$validator['messages'] = "index.php/dashboard";		
-					redirect('dashboard');		
+					redirect('home');		
 				}	
 				else {
 					$validator['success'] = false;

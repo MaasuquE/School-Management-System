@@ -53,6 +53,7 @@ if(isset($this->session->role)){
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
+      <li id="topNavDashboard"><a href="<?php echo base_url('home') ?>"> <i class="glyphicon glyphicon-home"></i> Home <span class="sr-only">(current)</span></a></li>
         <li id="topNavDashboard"><a href="<?php echo base_url('dashboard') ?>"> <i class="glyphicon glyphicon-dashboard"></i> Dashboard <span class="sr-only">(current)</span></a></li>
         <!-- <li><a href="#">Class</a></li> -->
         <li class="dropdown" id="topClassMainNav">

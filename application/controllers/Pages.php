@@ -43,6 +43,17 @@ class Pages extends MY_Controller
             $data['totalExpenses'] = $this->model_accounting->totalExpenses();
             $data['totalBudget'] = $this->model_accounting->totalBudget();
         }
+        if($page == 'home') {
+
+            $data['countTotalStudent'] = $this->model_student->countTotalStudent();
+            $data['countTotalTeacher'] = $this->model_teacher->countTotalTeacher();
+            $data['countTotalClasses'] = $this->model_classes->countTotalClass();
+            $data['countTotalMarksheet'] = $this->model_marksheet->countTotalMarksheet();
+
+            $data['totalIncome'] = $this->model_accounting->totalIncome();
+            $data['totalExpenses'] = $this->model_accounting->totalExpenses();
+            $data['totalBudget'] = $this->model_accounting->totalBudget();
+        }
 
         
         if($page == 'notice'){

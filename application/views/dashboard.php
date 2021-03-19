@@ -1,4 +1,10 @@
+<?php  
 
+if(isset($this->session->role)){
+    $user_role = $this->session->role;
+}
+
+?>
 
 <div class="row">
 	<div class="col-md-3">
@@ -44,6 +50,7 @@
 	</div>
 
 	<div class="col-md-5">
+		<?php if($user_role=='admin') {?>
 		<div class="panel panel-primary">
 			<div class="panel-heading"> Lifetime Income </div>
 			<div class="panel-body">
@@ -71,6 +78,9 @@
 				</center>
 			</div>	
 		</div>
+		<?php }else{ ?>
+		<img src="<?php echo base_url('assets/images/sms_black.png'); ?>" alt="">
+		<?php } ?>
 	</div>
 
 	<div class="col-md-7">
